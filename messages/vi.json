@@ -1,0 +1,40 @@
+{
+  "common": {
+    "hello": "Xin chào",
+    "welcome": "Chào mừng đến với Dinhan Store"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "rackets": "Vợt cầu lông",
+    "shoes": "Giày",
+    "apparel": "Quần áo",
+    "accessories": "Phụ kiện",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "home": {
+    "hero": {
+      "title": "Dụng Cụ Cầu Lông Cao Cấp",
+      "subtitle": "Nâng tầm trận đấu với vợt, giày và phụ kiện chất lượng từ các thương hiệu hàng đầu",
+      "shopNow": "Mua Ngay",
+      "viewCollection": "Xem Bộ Sưu Tập"
+    },
+    "categories": {
+      "title": "Danh Mục Sản Phẩm",
+      "rackets": "Vợt",
+      "shoes": "Giày",
+      "apparel": "Quần áo",
+      "accessories": "Phụ kiện"
+    },
+    "featured": {
+      "title": "Sản Phẩm Nổi Bật",
+      "viewAll": "Xem Tất Cả"
+    }
+  },
+  "product": {
+    "addToCart": "Thêm vào giỏ",
+    "outOfStock": "Hết hàng",
+    "sale": "Giảm giá"
+  }
+}

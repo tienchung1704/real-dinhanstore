@@ -1,0 +1,139 @@
+{
+  "pages": {
+    "home": {
+      "title": "YouTube MP4 to MP3 Video Downloader",
+      "description": "Paste your YouTube video link below and click 'Download'. Download and convert YouTube videos to MP3 for free online.",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+      "maximum": "Paste the links below, maximum three links at a time.",
+      "downloadButton": "Download",
+      "processing": "Processing...",
+      "urlRequired": "Please enter a YouTube URL.",
+      "downloadError": "Unable to download MP3 or Video.",
+      "retryError": "Download failed. Please try again.",
+      "videoTitle": "Video Title"
+    },
+    "hero": {
+      "title": "Free Online YouTube Video Downloader",
+      "paragraph": "Tired of struggling to download and convert your favorite YouTube videos into different formats? Want a fast, reliable, and user-friendly solution to enjoy your content offline? Look no further! The YouTube Video Downloader (Converter) is here to revolutionize your download and conversion experience."
+    },
+    "localeDropdown": {
+      "changeLanguage": "Change language"
+    },
+    "banner": {
+      "items": [
+        {
+          "title": "Supports multiple formats",
+          "context": "YT5S supports a wide range of video and audio formats, converting YouTube videos to MP4, 3GP, WebM, MP3, OGG, and M4A."
+        },
+        {
+          "title": "High-quality video downloads",
+          "context": "Our platform allows downloading YouTube videos in resolutions like 720p, 1080p, 2K, and even 4K."
+        },
+        {
+          "title": "User-friendly interface",
+          "context": "YT5S is designed to be easy to use, allowing you to download and convert videos in just a few clicks."
+        },
+        {
+          "title": "No software installation required",
+          "context": "YT5S is an online tool that doesn’t require any installation — simply paste the link and start downloading."
+        },
+        {
+          "title": "Fast download speed",
+          "context": "We’ve optimized our platform for the fastest possible download speeds."
+        },
+        {
+          "title": "Cross-platform compatibility",
+          "context": "YT5S works on Windows, Mac OS X, iOS, and Android."
+        }
+      ]
+    },
+    "menubar": {
+      "p1": "YouTube to MP4",
+      "p2": "YouTube to MP3",
+      "p3": "Docs",
+      "signIn": "Sign In",
+      "signUp": "Sign Up"
+    },
+    "signin": {
+      "title": "Sign in to Tube",
+      "description": "Welcome back, please sign in to continue.",
+      "sperator": "or",
+      "emailSpan": "Email Address",
+      "passwordSpan": "Password",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "I": "I agree to the ",
+      "terms": "Terms of Service",
+      "and": " and ",
+      "privacy": "Privacy Policy",
+      "noAccount": "Don't have an account? ",
+      "createOne": "Create one"
+    },
+    "signup": {
+      "title": "Create your account",
+      "description": "Welcome, please fill in the details to get started.",
+      "sperator": "or",
+      "usernameSpan": "Username",
+      "usernamePlaceholder": "Choose a username",
+      "emailSpan": "Email Address",
+      "passwordSpan": "Password",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Create a password",
+      "I": "I agree to the ",
+      "terms": "Terms of Service",
+      "and": " and ",
+      "privacy": "Privacy Policy",
+      "haveAccount": "Already have an account? ",
+      "signIn": "Sign in"
+    },
+    "maintile": "YouTube Downloader",
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Fill the detail, next we will send you an email to ensure that it is you.",
+      "tokenCode": "Token Code",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm New Password",
+      "resetButton": "Reset Password"
+    },
+    "howToUse": {
+      "title": "How to download YouTube videos",
+      "steps": [
+        {
+          "step": "1",
+          "context": "Enter your desired YouTube link or keywords into the search box, then click Convert."
+        },
+        {
+          "step": "2",
+          "context": "Choose your preferred output format (MP4 or MP3) and click 'Download'."
+        },
+        {
+          "step": "3",
+          "context": "Wait a few moments for the conversion to finish and download your file."
+        }
+      ]
+    },
+    "billing": {
+      "success": {
+        "title": "Payment Successful!",
+        "description": "Your payment has been processed successfully. Your premium features are now active.",
+        "sessionId": "Session ID: {sessionId}",
+        "whatsIncluded": "What's Included",
+        "benefit1": "Unlimited downloads",
+        "benefit2": "High-quality video conversions",
+        "benefit3": "No ads",
+        "benefit4": "Priority support",
+        "startUsing": "Start Downloading",
+        "viewPlans": "View Plans",
+        "supportNote": "Need help? Contact our support team."
+      },
+      "cancel": {
+        "title": "Payment Cancelled",
+        "description": "Your payment was cancelled and no charges were made.",
+        "message": "You can try again anytime or choose a different payment method.",
+        "tryAgain": "Try Again",
+        "goHome": "Go Home",
+        "supportNote": "Need help? Contact our support team."
+      }
+    }
+  }
+}

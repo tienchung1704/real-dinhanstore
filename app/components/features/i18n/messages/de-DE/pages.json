@@ -1,0 +1,118 @@
+{
+  "pages": {
+    "home": {
+      "title": "YouTube MP4 zu MP3 Video Downloader",
+      "description": "Fügen Sie den YouTube-Link unten ein und klicken Sie auf 'Herunterladen'. Laden Sie Videos online herunter und konvertieren Sie sie kostenlos in MP3.",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+      "downloadButton": "Herunterladen",
+      "processing": "Wird bearbeitet...",
+      "urlRequired": "Bitte geben Sie eine YouTube-URL ein.",
+      "downloadError": "MP3 oder Video konnte nicht heruntergeladen werden.",
+      "retryError": "Download fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "videoTitle": "Videotitel",
+      "maximum": "Fügen Sie die Links unten ein, maximal drei Links auf einmal."
+
+    },
+    "hero": {
+      "title": "Kostenloser Online-YouTube-Video-Downloader",
+      "paragraph": "Sind Sie es leid, Schwierigkeiten beim Herunterladen und Konvertieren Ihrer Lieblings-YouTube-Videos in verschiedene Formate zu haben? Möchten Sie eine schnelle, zuverlässige und benutzerfreundliche Lösung, um Ihre Lieblingsinhalte offline zu genießen? Suchen Sie nicht weiter! Der YouTube Video Downloader (Converter) ist hier, um Ihr YouTube-Download- und Konvertierungserlebnis zu revolutionieren."
+    },
+    "resetPassword": {
+  "title": "Passwort zurücksetzen",
+  "description": "Füllen Sie die Angaben aus, dann senden wir Ihnen eine E-Mail, um sicherzustellen, dass Sie es wirklich sind.",
+  "tokenCode": "Token-Code",
+  "newPassword": "Neues Passwort",
+  "confirmNewPassword": "Neues Passwort bestätigen",
+  "resetButton": "Passwort zurücksetzen"
+},
+    "localeDropdown": {
+      "changeLanguage": "Sprache ändern"
+    },
+    "banner": {
+      "items": [
+        {
+          "title": "Unterstützt mehrere Formate",
+          "context": "YT5S unterstützt eine Vielzahl von Video- und Audioformaten und konvertiert YouTube-Videos in MP4, 3GP, WebM, MP3, OGG und M4A. Diese Flexibilität stellt sicher, dass Sie Ihre heruntergeladenen Inhalte auf jedem Gerät genießen können, sei es PC, Tablet, iPhone oder Android."
+        },
+        {
+          "title": "Hochwertiger Video-Download",
+          "context": "Unsere Plattform ermöglicht das Herunterladen von YouTube-Videos in verschiedenen Auflösungen, darunter 720p, 1080p, 2K und sogar 4K. So können Sie Ihre Inhalte in bester Qualität genießen."
+        },
+        {
+          "title": "Benutzerfreundliche Oberfläche",
+          "context": "YT5S ist einfach zu bedienen. Unsere intuitive Oberfläche ermöglicht Ihnen das Herunterladen und Konvertieren von YouTube-Videos mit nur wenigen Klicks – ganz ohne technisches Wissen."
+        },
+        {
+          "title": "Keine Softwareinstallation erforderlich",
+          "context": "Im Gegensatz zu vielen anderen Video-Downloadern und -Konvertern ist YT5S ein Online-Tool, das keine Installation erfordert. Besuchen Sie einfach unsere Website, geben Sie die Video-URL ein und beginnen Sie mit dem Herunterladen."
+        },
+        {
+          "title": "Schnelle Download-Geschwindigkeit",
+          "context": "Wir wissen, dass Ihre Zeit wertvoll ist, daher haben wir unsere Plattform für die schnellstmöglichen Downloads optimiert. Verabschieden Sie sich von langen Wartezeiten."
+        },
+        {
+          "title": "Plattformübergreifende Kompatibilität",
+          "context": "YT5S ist mit Windows, Mac OS X, iOS und Android kompatibel, sodass Sie das Tool auf Ihrem bevorzugten Gerät verwenden können."
+        }
+      ]
+    },
+    "menubar": {
+      "p1": "YouTube zu MP4",
+      "p2": "YouTube zu MP3",
+      "p3": "Dokumentation",
+      "signIn": "Anmelden",
+      "signUp": "Registrieren"
+    },
+    "signin": {
+      "title": "Bei Fon anmelden",
+      "description": "Willkommen zurück, bitte melden Sie sich an, um fortzufahren.",
+      "sperator": "oder",
+      "emailSpan": "E-Mail-Adresse",
+      "passwordSpan": "Passwort",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+      "I": "Ich stimme den ",
+      "terms": "Nutzungsbedingungen",
+      "and": " und ",
+      "privacy": "Datenschutzrichtlinien",
+      "noAccount": "Sie haben kein Konto? ",
+      "createOne": "Erstellen Sie eins"
+    },
+    "signup": {
+      "title": "Erstellen Sie Ihr Konto",
+      "description": "Willkommen, bitte füllen Sie die Details aus, um zu beginnen.",
+      "sperator": "oder",
+      "usernameSpan": "Benutzername",
+      "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
+      "emailSpan": "E-Mail-Adresse",
+      "passwordSpan": "Passwort",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "passwordPlaceholder": "Erstellen Sie ein Passwort",
+      "I": "Ich stimme den ",
+      "terms": "Nutzungsbedingungen",
+      "and": " und ",
+      "privacy": "Datenschutzrichtlinien",
+      "haveAccount": "Sie haben bereits ein Konto? ",
+      "signIn": "Anmelden"
+    },
+    "maintile": "YouTube-Downloader",
+
+    "howToUse": {
+      "title": "So laden Sie YouTube-Videos herunter",
+      "steps": [
+        {
+          "step": "1",
+          "context": "Geben Sie einfach den gewünschten YouTube-Link oder relevante Schlüsselwörter in das Suchfeld ein und klicken Sie dann auf Konvertieren."
+        },
+        {
+          "step": "2",
+          "context": "Wählen Sie Ihr bevorzugtes Ausgabeformat (MP4 oder MP3) und starten Sie den Vorgang, indem Sie auf 'Herunterladen' klicken."
+        },
+        {
+          "step": "3",
+          "context": "Warten Sie kurz, bis die Konvertierung abgeschlossen ist, und laden Sie Ihre Datei herunter. So einfach ist das."
+        }
+      ]
+    }
+  }
+}

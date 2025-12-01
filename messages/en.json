@@ -1,0 +1,40 @@
+{
+  "common": {
+    "hello": "Hello",
+    "welcome": "Welcome to Dinhan Store"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "rackets": "Rackets",
+    "shoes": "Shoes",
+    "apparel": "Apparel",
+    "accessories": "Accessories",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Premium Badminton Equipment",
+      "subtitle": "Elevate your game with top-quality rackets, shoes, and gear from leading brands",
+      "shopNow": "Shop Now",
+      "viewCollection": "View Collection"
+    },
+    "categories": {
+      "title": "Shop by Category",
+      "rackets": "Rackets",
+      "shoes": "Shoes",
+      "apparel": "Apparel",
+      "accessories": "Accessories"
+    },
+    "featured": {
+      "title": "Featured Products",
+      "viewAll": "View All"
+    }
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "sale": "Sale"
+  }
+}

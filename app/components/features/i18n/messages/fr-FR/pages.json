@@ -1,0 +1,117 @@
+{
+  "pages": {
+    "home": {
+      "title": "Téléchargeur de vidéos YouTube MP4 en MP3",
+      "description": "Collez le lien YouTube ci-dessous et cliquez sur 'Télécharger'. Téléchargez et convertissez des vidéos en ligne en MP3 gratuitement.",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+      "downloadButton": "Télécharger",
+      "processing": "Traitement...",
+      "urlRequired": "Veuillez entrer une URL YouTube.",
+      "downloadError": "Impossible de télécharger le MP3 ou la vidéo.",
+      "retryError": "Échec du téléchargement. Veuillez réessayer.",
+      "videoTitle": "Titre de la vidéo",
+      "maximum": "Collez les liens ci-dessous, trois liens maximum à la fois."
+
+    },
+    "resetPassword": {
+  "title": "Réinitialiser le mot de passe",
+  "description": "Renseignez vos informations, puis nous vous enverrons un e-mail pour vérifier qu’il s’agit bien de vous.",
+  "tokenCode": "Code du jeton",
+  "newPassword": "Nouveau mot de passe",
+  "confirmNewPassword": "Confirmer le nouveau mot de passe",
+  "resetButton": "Réinitialiser le mot de passe"
+},
+    "hero": {
+      "title": "Téléchargeur de vidéos YouTube en ligne gratuit",
+      "paragraph": "Vous en avez assez d’avoir du mal à télécharger et convertir vos vidéos YouTube préférées dans différents formats ? Vous souhaitez une solution rapide, fiable et conviviale ? Ne cherchez plus ! Le téléchargeur YouTube (Converter) est là pour révolutionner votre expérience."
+    },
+    "localeDropdown": {
+      "changeLanguage": "Changer de langue"
+    },
+    "banner": {
+      "items": [
+        {
+          "title": "Prend en charge plusieurs formats",
+          "context": "YT5S prend en charge de nombreux formats vidéo et audio, convertissant les vidéos YouTube en MP4, 3GP, WebM, MP3, OGG et M4A."
+        },
+        {
+          "title": "Téléchargements haute qualité",
+          "context": "Notre plateforme permet de télécharger des vidéos YouTube en 720p, 1080p, 2K et même 4K."
+        },
+        {
+          "title": "Interface conviviale",
+          "context": "YT5S est simple et intuitif — téléchargez et convertissez vos vidéos en quelques clics."
+        },
+        {
+          "title": "Aucune installation requise",
+          "context": "YT5S est un outil en ligne ne nécessitant aucune installation. Il suffit d’entrer le lien et de lancer le téléchargement."
+        },
+        {
+          "title": "Vitesse de téléchargement rapide",
+          "context": "Notre plateforme est optimisée pour offrir la vitesse de téléchargement la plus rapide possible."
+        },
+        {
+          "title": "Compatible multi-plateforme",
+          "context": "YT5S est compatible avec Windows, Mac OS X, iOS et Android."
+        }
+      ]
+    },
+    "signin": {
+      "title": "Se connecter à Fon",
+      "description": "Bon retour, veuillez vous connecter pour continuer.",
+      "sperator": "ou",
+      "emailSpan": "Adresse e-mail",
+      "passwordSpan": "Mot de passe",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "I": "J'accepte les ",
+      "terms": "Conditions d'utilisation",
+      "and": " et ",
+      "privacy": "Politique de confidentialité",
+      "noAccount": "Vous n'avez pas de compte ? ",
+      "createOne": "Créer un compte"
+    },
+    "signup": {
+      "title": "Créez votre compte",
+      "description": "Bienvenue, veuillez remplir les informations pour commencer.",
+      "sperator": "ou",
+      "usernameSpan": "Nom d'utilisateur",
+      "usernamePlaceholder": "Choisissez un nom d'utilisateur",
+      "emailSpan": "Adresse e-mail",
+      "passwordSpan": "Mot de passe",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "passwordPlaceholder": "Créez un mot de passe",
+      "I": "J'accepte les ",
+      "terms": "Conditions d'utilisation",
+      "and": " et ",
+      "privacy": "Politique de confidentialité",
+      "haveAccount": "Vous avez déjà un compte ? ",
+      "signIn": "Se connecter"
+    },
+    "menubar": {
+      "p1": "YouTube vers MP4",
+      "p2": "YouTube vers MP3",
+      "p3": "Documents",
+      "signIn": "Se connecter",
+      "signUp": "S'inscrire"
+    },
+    "maintile": "Téléchargeur YouTube",
+    "howToUse": {
+      "title": "Comment télécharger une vidéo YouTube",
+      "steps": [
+        {
+          "step": "1",
+          "context": "Saisissez le lien YouTube ou des mots-clés, puis cliquez sur 'Convertir'."
+        },
+        {
+          "step": "2",
+          "context": "Choisissez le format de sortie (MP4 ou MP3) et cliquez sur 'Télécharger'."
+        },
+        {
+          "step": "3",
+          "context": "Patientez quelques instants puis téléchargez votre fichier."
+        }
+      ]
+    }
+  }
+}

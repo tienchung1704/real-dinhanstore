@@ -1,0 +1,117 @@
+{
+  "pages": {
+    "home": {
+      "title": "Trình tải video YouTube MP4 sang MP3",
+      "description": "Dán link video YouTube vào ô bên dưới và nhấn 'Tải về'. Tải video trực tuyến, chuyển đổi video trực tuyến sang mp3 miễn phí",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+      "downloadButton": "Tải về",
+      "processing": "Đang xử lý...",
+      "urlRequired": "Vui lòng nhập URL YouTube.",
+      "downloadError": "Không thể tải MP3 hoặc Video.",
+      "retryError": "Không thể tải xuống. Vui lòng thử lại.",
+      "videoTitle": "Tiêu đề video",
+      "maximum": "Dán các liên kết bên dưới, tối đa ba liên kết mỗi lần."
+
+    },
+    "hero": {
+      "title": "Trình tải xuống video YouTube trực tuyến miễn phí",
+      "paragraph": "Bạn có mệt mỏi khi phải vật lộn để tải xuống và chuyển đổi video YouTube yêu thích của bạn sang các định dạng khác nhau không? Bạn có muốn một giải pháp nhanh chóng, đáng tin cậy và thân thiện với người dùng để thưởng thức nội dung yêu thích của bạn ngoại tuyến không? Không tìm đâu xa! Trình tải xuống video YouTube (Converter) có mặt để cách mạng hóa trải nghiệm tải xuống và chuyển đổi video YouTube của bạn."
+    },
+    "localeDropdown": {
+      "changeLanguage": "Thay đổi ngôn ngữ"
+    },
+    "menubar": {
+      "p1": "YouTube sang MP4",
+      "p2": "Youtube sang MP3",
+      "p3": "Tài liệu",
+      "signIn": "Đăng nhập",
+      "signUp": "Đăng ký"
+    },
+    "signin": {
+      "title": "Đăng nhập vào Fon",
+      "description": "Chào mừng bạn trở lại, vui lòng đăng nhập để tiếp tục.",
+      "sperator": "hoặc",
+      "emailSpan": "Địa chỉ Email",
+      "passwordSpan": "Mật khẩu",
+      "emailPlaceholder": "Nhập email của bạn",
+      "passwordPlaceholder": "Nhập mật khẩu của bạn",
+      "I": "Tôi đồng ý với ",
+      "terms": "Điều khoản dịch vụ",
+      "and": " và ",
+      "privacy": "Chính sách bảo mật",
+      "noAccount": "Chưa có tài khoản? ",
+      "createOne": "Tạo tài khoản"
+    },
+    "signup": {
+      "title": "Tạo tài khoản của bạn",
+      "description": "Chào mừng bạn, vui lòng điền thông tin để bắt đầu.",
+      "sperator": "hoặc",
+      "usernameSpan": "Tên người dùng",
+      "usernamePlaceholder": "Chọn tên người dùng",
+      "emailSpan": "Địa chỉ Email",
+      "passwordSpan": "Mật khẩu",
+      "emailPlaceholder": "Nhập email của bạn",
+      "passwordPlaceholder": "Tạo mật khẩu",
+      "I": "Tôi đồng ý với ",
+      "terms": "Điều khoản dịch vụ",
+      "and": " và ",
+      "privacy": "Chính sách bảo mật",
+      "haveAccount": "Đã có tài khoản? ",
+      "signIn": "Đăng nhập"
+    },
+    "maintile": "Trình tải Youtube",
+    "resetPassword": {
+      "title": "Đặt lại mật khẩu",
+      "description": "Điền chi tiết, tiếp theo chúng tôi sẽ gửi email cho bạn để đảm bảo đó là bạn.",
+      "tokenCode": "Mã token",
+      "newPassword": "Mật khẩu mới",
+      "confirmNewPassword": "Xác nhận mật khẩu mới",
+      "resetButton": "Đặt lại mật khẩu"
+    },
+    "banner": {
+      "items": [
+        {
+          "title": "Hỗ trợ nhiều định dạng",
+          "context": "YT5S hỗ trợ một loạt các định dạng video và âm thanh, chuyển đổi video YouTube thành MP4, 3GP, WebM, MP3, OGG và M4A. Tính linh hoạt này đảm bảo rằng bạn có thể thưởng thức nội dung đã tải xuống của mình trên bất kỳ thiết bị nào, có thể là PC, máy tính bảng, iPhone hoặc điện thoại thông minh Android."
+        },
+        {
+          "title": "Tải xuống video chất lượng cao",
+          "context": "Nền tảng của chúng tôi cho phép bạn tải xuống các video YouTube ở các độ phân giải khác nhau, bao gồm 720p, 1080p, 2K và thậm chí 4K. Điều này có nghĩa là bạn có thể thưởng thức nội dung của mình với chất lượng cao nhất có thể, giống như người sáng tạo dự định."
+        },
+        {
+          "title": "Giao diện thân thiện với người dùng",
+          "context": "YT5S được thiết kế để dễ sử dụng. Giao diện đơn giản và trực quan của chúng tôi cho phép bạn tải xuống và chuyển đổi video YouTube chỉ trong vài lần nhấp, mà không cần bất kỳ kiến thức kỹ thuật nào."
+        },
+        {
+          "title": "Không cần cài đặt phần mềm",
+          "context": "Không giống như nhiều trình tải xuống và chuyển đổi video khác, YT5S là công cụ trực tuyến không yêu cầu cài đặt. Chỉ cần truy cập trang web của chúng tôi, nhập URL video và bắt đầu tải xuống nội dung yêu thích của bạn."
+        },
+        {
+          "title": "Tốc độ tải xuống nhanh",
+          "context": "Chúng tôi hiểu rằng thời gian là quý giá, vì vậy chúng tôi đã tối ưu hóa nền tảng để mang lại tốc độ tải xuống nhanh nhất có thể. Nói lời tạm biệt với thời gian chờ đợi lâu và chào đón sự hài lòng tức thì."
+        },
+        {
+          "title": "Khả năng tương thích với nhiều nền tảng",
+          "context": "YT5S tương thích với nhiều nền tảng như Windows, Mac OS X, iOS và Android, đảm bảo bạn có thể sử dụng công cụ này trên thiết bị yêu thích của mình."
+        }
+      ]
+    },
+    "howToUse": {
+      "title": "Cách tải xuống video YouTube",
+      "steps": [
+        {
+          "step": "1",
+          "context": "Chỉ cần nhập liên kết YouTube mong muốn của bạn hoặc nhập các từ khóa có liên quan vào hộp tìm kiếm, sau đó nhấn Chuyển đổi."
+        },
+        {
+          "step": "2",
+          "context": "Chọn Định dạng đầu ra ưa thích của bạn (MP4 hoặc MP3) và bắt đầu quá trình chuyển bằng cách nhấp vào nút 'Tải xuống'."
+        },
+        {
+          "step": "3",
+          "context": "Đợi ngắn gọn để chuyển đổi hoàn tất và tải xuống tệp của bạn. Đó là điều đơn giản và thân thiện với người dùng."
+        }
+      ]
+    }
+  }
+}

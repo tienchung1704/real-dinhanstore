@@ -1,0 +1,247 @@
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import Stripe from "stripe";
+import { getDataSource } from "@/lib/db/data-source";
+import { Order } from "@/lib/db/entities/Order";
+import { OrderItem } from "@/lib/db/entities/OrderItem";
+import { Product } from "@/lib/db/entities/Product";
+import { User } from "@/lib/db/entities/User";
+import { Address } from "@/lib/db/entities/Address";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
+
+// Exchange rate VND to USD
+const VND_TO_USD_RATE = 24500;
+
+// Generate unique order number
+function generateOrderNumber(): string {
+  const date = new Date();
+  const year = date.getFullYear().toString().slice(-2);
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const random = Math.floor(Math.random() * 10000).toString().padStart(4, "0");
+  return `ORD${year}${month}${day}${random}`;
+}
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  salePrice?: number;
+  quantity: number;
+  image?: string;
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { userId: clerkId } = await auth();
+    if (!clerkId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const { items, total, discount, discountCode, pointsUsed = 0, addressId, currency = "vnd", locale = "vi" } = body;
+
+    if (!items || items.length === 0) {
+      return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
+    }
+
+    // Helper to validate URL
+    const isValidUrl = (url: string): boolean => {
+      try {
+        new URL(url);
+        return url.startsWith("http://") || url.startsWith("https://");
+      } catch {
+        return false;
+      }
+    };
+
+    // Determine currency and convert prices if needed
+    const useCurrency = currency === "usd" || locale === "en" ? "usd" : "vnd";
+    
+    // Create line items for Stripe
+    const lineItems = items.map((item: CartItem) => {
+      const productData: { name: string; description?: string; images?: string[] } = {
+        name: item.name,
+        description: `Dinhan Store - Badminton Equipment`,
+      };
+
+      // Only add images if valid URL
+      if (item.image && isValidUrl(item.image)) {
+        productData.images = [item.image];
+      }
+
+      // Calculate price based on currency
+      let unitAmount = Math.round(item.salePrice || item.price);
+      if (useCurrency === "usd") {
+        // Convert VND to USD cents (Stripe uses smallest currency unit)
+        unitAmount = Math.round((unitAmount / VND_TO_USD_RATE) * 100);
+      }
+
+      return {
+        price_data: {
+          currency: useCurrency,
+          product_data: productData,
+          unit_amount: unitAmount,
+        },
+        quantity: item.quantity,
+      };
+    });
+
+    // Create order in database first
+    const dataSource = await getDataSource();
+    const orderRepo = dataSource.getRepository(Order);
+    const productRepo = dataSource.getRepository(Product);
+    const userRepo = dataSource.getRepository(User);
+    const addressRepo = dataSource.getRepository(Address);
+
+    // Get user info
+    const user = await userRepo.findOne({ where: { clerkId } });
+    
+    // Get address info
+    let shippingAddress = "";
+    let customerName = user?.firstName + " " + user?.lastName || "Khách hàng";
+    let customerPhone = user?.phone || "";
+    const customerEmail = user?.email || "";
+    
+    if (addressId) {
+      const address = await addressRepo.findOne({ where: { id: addressId } });
+      if (address) {
+        customerName = address.fullName;
+        customerPhone = address.phone;
+        shippingAddress = `${address.addressDetail}, ${address.ward || ""}, ${address.district || ""}, ${address.province || ""}`;
+      }
+    }
+
+    // Calculate totals and create order items
+    let subtotal = 0;
+    const orderItems: OrderItem[] = [];
+
+    for (const item of items) {
+      const product = await productRepo.findOne({ where: { id: item.id } });
+      if (product) {
+        const price = Number(item.salePrice || item.price || product.salePrice || product.price);
+        const itemTotal = price * item.quantity;
+        subtotal += itemTotal;
+
+        const orderItem = new OrderItem();
+        orderItem.productId = product.id;
+        orderItem.productName = item.name || product.name;
+        orderItem.price = price;
+        orderItem.quantity = item.quantity;
+        orderItem.total = itemTotal;
+        orderItems.push(orderItem);
+      }
+    }
+
+    const discountAmount = discount ? (subtotal * discount) / 100 : 0;
+    const pointsDiscount = pointsUsed || 0; // 1 point = 1 VND
+    const finalTotal = total || Math.max(0, subtotal - discountAmount - pointsDiscount);
+
+    // Validate points if used
+    if (pointsUsed > 0 && user) {
+      const currentPoints = Number(user.points) || 0;
+      if (pointsUsed > currentPoints) {
+        return NextResponse.json({ error: "Không đủ điểm thưởng" }, { status: 400 });
+      }
+    }
+
+    // Build note with discount info
+    const noteItems: string[] = [];
+    if (discountCode) noteItems.push(`Mã giảm giá: ${discountCode}`);
+    if (pointsUsed > 0) noteItems.push(`Điểm đã dùng: ${pointsUsed}`);
+
+    // Create order with pending payment status
+    const order = orderRepo.create({
+      orderNumber: generateOrderNumber(),
+      customerName,
+      customerEmail,
+      customerPhone,
+      shippingAddress,
+      subtotal,
+      shippingFee: 0,
+      discount: discountAmount + pointsDiscount, // Include points discount
+      total: finalTotal,
+      paymentMethod: "stripe",
+      paymentStatus: "pending",
+      status: "pending",
+      note: noteItems.join(" | "),
+      userId: clerkId,
+      items: orderItems,
+    });
+
+    await orderRepo.save(order);
+
+    // Create Stripe checkout session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${order.id}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/checkout/cancel?order_id=${order.id}`,
+      // Store branding
+      payment_intent_data: {
+        description: "Dinhan Store - Badminton Equipment Purchase",
+        metadata: {
+          store: "Dinhan Store",
+          clerkId,
+          orderId: order.id.toString(),
+        },
+      },
+      // Custom branding text
+      custom_text: {
+        submit: {
+          message: "Cảm ơn bạn đã mua hàng tại Dinhan Store! / Thank you for shopping at Dinhan Store!",
+        },
+      },
+      // Locale for checkout page
+      locale: locale === "en" ? "en" : "vi",
+      metadata: {
+        clerkId,
+        orderId: order.id.toString(),
+        addressId: addressId?.toString() || "",
+        discount: discount?.toString() || "0",
+        discountCode: discountCode || "",
+        pointsUsed: pointsUsed?.toString() || "0",
+        currency: useCurrency,
+      },
+      ...(discount > 0 && {
+        discounts: [
+          {
+            coupon: await getOrCreateCoupon(discount),
+          },
+        ],
+      }),
+    });
+
+    // Update order with stripe session id
+    order.stripeSessionId = session.id;
+    await orderRepo.save(order);
+
+    return NextResponse.json({ url: session.url, orderId: order.id });
+  } catch (error) {
+    console.error("Stripe checkout error:", error);
+    return NextResponse.json(
+      { error: "Failed to create checkout session" },
+      { status: 500 }
+    );
+  }
+}
+
+async function getOrCreateCoupon(discountPercent: number): Promise<string> {
+  const couponId = `DISCOUNT_${discountPercent}`;
+  
+  try {
+    // Try to retrieve existing coupon
+    await stripe.coupons.retrieve(couponId);
+    return couponId;
+  } catch {
+    // Create new coupon if not exists
+    await stripe.coupons.create({
+      id: couponId,
+      percent_off: discountPercent,
+      duration: "once",
+    });
+    return couponId;
+  }
+}
