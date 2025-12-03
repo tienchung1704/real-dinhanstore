@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   ShoppingCart,
   Menu,
@@ -30,6 +31,8 @@ const categoryIcons: Record<string, string> = {
 };
 
 export function NavigationMenuDemo() {
+  const t = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const { categories, isLoaded, isLoading, getBrandsByCategory } = useProductStore();
   const { itemCount, openCart } = useCart();
 
@@ -96,7 +99,7 @@ export function NavigationMenuDemo() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" />
                 <input
                   type="text"
-                  placeholder="Tìm kiếm sản phẩm..."
+                  placeholder={tCommon("search") + "..."}
                   className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all"
                 />
               </div>
@@ -141,7 +144,7 @@ export function NavigationMenuDemo() {
             {isLoading && !isLoaded ? (
               <div className="flex items-center gap-2 text-gray-500">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">Đang tải...</span>
+                <span className="text-sm">{tCommon("loading")}</span>
               </div>
             ) : (
               <div className="flex items-center gap-1">
@@ -151,7 +154,7 @@ export function NavigationMenuDemo() {
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl text-gray-600 hover:bg-white hover:text-emerald-600 hover:shadow-md transition-all duration-300"
                 >
                   <Sparkles className="w-4 h-4" />
-                  Tất cả
+                  {tCommon("all")}
                 </Link>
 
                 {/* First 3 categories */}
@@ -190,7 +193,7 @@ export function NavigationMenuDemo() {
                     }`}
                   >
                     <MoreHorizontal className="w-4 h-4" />
-                    <span>Khác</span>
+                    <span>{tCommon("viewMore")}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showOthers ? "rotate-180" : ""}`} />
                   </button>
                 )}
@@ -220,7 +223,7 @@ export function NavigationMenuDemo() {
                       onClick={closeAll}
                     >
                       <RotateCcw className="w-4 h-4" />
-                      Xem tất cả
+                      {tCommon("all")}
                     </Link>
                     <div className="grid grid-cols-2 gap-2 max-h-[40vh] overflow-y-auto">
                       {categoriesWithData
@@ -250,7 +253,7 @@ export function NavigationMenuDemo() {
                     <div className="flex">
                       {/* Left panel */}
                       <div className="w-52 border-r border-gray-100 bg-gray-50/50 p-3">
-                        <p className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Danh mục</p>
+                        <p className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("products")}</p>
                         {otherCategories.map((category) => (
                           <button
                             key={category.slug}
@@ -286,7 +289,7 @@ export function NavigationMenuDemo() {
                               onClick={closeAll}
                             >
                               <RotateCcw className="w-4 h-4" />
-                              Xem tất cả
+                              {tCommon("all")}
                             </Link>
                             <div className="space-y-1">
                               {categoriesWithData
@@ -308,7 +311,7 @@ export function NavigationMenuDemo() {
                     </div>
                     <div className="border-t border-gray-100 p-3 bg-gray-50/50">
                       <button onClick={closeAll} className="w-full px-4 py-2.5 text-sm text-gray-500 hover:text-gray-700 hover:bg-white rounded-xl transition-all">
-                        Đóng
+                        {tCommon("close")}
                       </button>
                     </div>
                   </div>
@@ -328,7 +331,7 @@ export function NavigationMenuDemo() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Tìm kiếm..."
+                placeholder={tCommon("search") + "..."}
                 className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -341,20 +344,20 @@ export function NavigationMenuDemo() {
               className="flex items-center gap-3 py-3 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-2xl font-medium transition-all"
               onClick={() => setIsOpen(false)}
             >
-              🏠 Trang chủ
+              🏠 {t("home")}
             </Link>
             <Link
               href="/products"
               className="flex items-center gap-3 py-3 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-2xl font-medium transition-all"
               onClick={() => setIsOpen(false)}
             >
-              <Sparkles className="w-5 h-5" /> Tất cả sản phẩm
+              <Sparkles className="w-5 h-5" /> {t("products")}
             </Link>
           </div>
 
           {/* Mobile Categories */}
           <div className="p-4 border-t border-gray-100">
-            <p className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Danh mục</p>
+            <p className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">{t("products")}</p>
             {isLoading && !isLoaded ? (
               <div className="flex items-center justify-center py-8">
                 <Loader2 className="w-6 h-6 animate-spin text-emerald-500" />
@@ -385,7 +388,7 @@ export function NavigationMenuDemo() {
                           onClick={() => setIsOpen(false)}
                         >
                           <RotateCcw className="w-4 h-4" />
-                          Xem tất cả
+                          {tCommon("all")}
                         </Link>
                         {category.items.map((item) => (
                           <Link

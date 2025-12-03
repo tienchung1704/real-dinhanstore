@@ -1,8 +1,7 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState } from "react";
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -13,7 +12,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-import { CheckCheck, Globe } from "lucide-react";
+import { CheckCheck, Globe, Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -25,18 +24,19 @@ type LocaleSwitcherProps = Omit<
 >;
 
 export function LocaleDropdown({ className, ...props }: LocaleSwitcherProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const currentLocale = useLocale();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const handleLocaleChange = (newLocale: string) => {
+    if (newLocale === currentLocale) return;
+    
+    setIsPending(true);
+    
     // Set cookie for locale preference
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
     
-    startTransition(() => {
-      router.refresh();
-    });
+    // Full page reload to apply new locale
+    window.location.reload();
   };
 
   return (
@@ -48,7 +48,11 @@ export function LocaleDropdown({ className, ...props }: LocaleSwitcherProps) {
           className={cn("h-9 w-9 cursor-pointer", className)}
           {...props}
         >
-          <Globe className="h-[1.3rem] w-[1.3rem] hover:text-zinc-200" />
+          {isPending ? (
+            <Loader2 className="h-[1.3rem] w-[1.3rem] animate-spin" />
+          ) : (
+            <Globe className="h-[1.3rem] w-[1.3rem] hover:text-zinc-200" />
+          )}
           <span className="sr-only">Change language</span>
         </Button>
       </DropdownMenuTrigger>

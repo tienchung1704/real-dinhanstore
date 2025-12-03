@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Facebook, Instagram, Youtube, Phone, Mail, MapPin, CreditCard, Truck, Shield, ArrowUp } from "lucide-react";
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const tCategories = useTranslations("home.categories");
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -28,7 +32,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Chuyên cung cấp các sản phẩm cầu lông chính hãng với chất lượng tốt nhất và giá cả hợp lý.
+              {t("aboutDesc")}
             </p>
             <div className="flex gap-3">
               {[
@@ -49,15 +53,15 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Liên kết nhanh</h3>
+            <h3 className="text-lg font-bold mb-6">{t("quickLinks")}</h3>
             <ul className="space-y-3">
               {[
-                { label: "Trang chủ", href: "/" },
-                { label: "Sản phẩm", href: "/products" },
-                { label: "Giới thiệu", href: "/about" },
-                { label: "Liên hệ", href: "/contact" },
-                { label: "Chính sách bảo hành", href: "/warranty" },
-                { label: "Chính sách đổi trả", href: "/return-policy" },
+                { labelKey: "home", href: "/" },
+                { labelKey: "products", href: "/products" },
+                { labelKey: "about", href: "/about" },
+                { labelKey: "contact", href: "/contact" },
+                { labelKey: "warranty", href: "/warranty" },
+                { labelKey: "returnPolicy", href: "/return-policy" },
               ].map((link, index) => (
                 <li key={index}>
                   <Link
@@ -65,7 +69,7 @@ export function Footer() {
                     className="text-gray-400 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -74,22 +78,22 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Danh mục sản phẩm</h3>
+            <h3 className="text-lg font-bold mb-6">{t("categories")}</h3>
             <ul className="space-y-3">
               {[
-                { label: "🏸 Vợt cầu lông", href: "/products?category=vot" },
-                { label: "👟 Giày cầu lông", href: "/products?category=giay" },
-                { label: "👕 Quần áo thể thao", href: "/products?category=ao" },
-                { label: "🎒 Balo & Túi", href: "/products?category=balo" },
-                { label: "🔧 Phụ kiện", href: "/products?category=phukien" },
-                { label: "⚙️ Máy căng vợt", href: "/products?category=may" },
+                { icon: "🏸", labelKey: "rackets", href: "/products?category=vot" },
+                { icon: "👟", labelKey: "shoes", href: "/products?category=giay" },
+                { icon: "👕", labelKey: "apparel", href: "/products?category=ao" },
+                { icon: "🎒", labelKey: "bags", href: "/products?category=balo" },
+                { icon: "🔧", labelKey: "accessories", href: "/products?category=phukien" },
+                { icon: "⚙️", labelKey: "machines", href: "/products?category=may" },
               ].map((link, index) => (
                 <li key={index}>
                   <Link
                     href={link.href}
                     className="text-gray-400 hover:text-emerald-400 transition-colors"
                   >
-                    {link.label}
+                    {link.icon} {tCategories(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -98,7 +102,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Liên hệ</h3>
+            <h3 className="text-lg font-bold mb-6">{t("contact")}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -114,7 +118,7 @@ export function Footer() {
                   <Phone className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Hotline</p>
+                  <p className="text-sm text-gray-400">{t("hotline")}</p>
                   <a href="tel:0901234567" className="font-semibold text-white hover:text-emerald-400 transition-colors">
                     0901 234 567
                   </a>
@@ -125,7 +129,7 @@ export function Footer() {
                   <Mail className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Email</p>
+                  <p className="text-sm text-gray-400">{t("email")}</p>
                   <a href="mailto:info@dinhanstore.com" className="font-semibold text-white hover:text-emerald-400 transition-colors">
                     info@dinhanstore.com
                   </a>
@@ -139,13 +143,13 @@ export function Footer() {
         <div className="mt-16 pt-8 border-t border-white/10">
           <div className="flex flex-wrap items-center justify-center gap-8">
             {[
-              { icon: CreditCard, label: "Thanh toán an toàn" },
-              { icon: Truck, label: "Giao hàng toàn quốc" },
-              { icon: Shield, label: "Bảo hành chính hãng" },
+              { icon: CreditCard, labelKey: "trustBadges.securePayment" },
+              { icon: Truck, labelKey: "trustBadges.nationwide" },
+              { icon: Shield, labelKey: "trustBadges.warranty" },
             ].map((badge, index) => (
               <div key={index} className="flex items-center gap-3 text-gray-400">
                 <badge.icon className="w-6 h-6 text-emerald-400" />
-                <span className="text-sm font-medium">{badge.label}</span>
+                <span className="text-sm font-medium">{t(badge.labelKey)}</span>
               </div>
             ))}
           </div>
@@ -157,14 +161,14 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-400 text-center md:text-left">
-              © 2024 Dinhan Store. Tất cả quyền được bảo lưu.
+              {t("copyright")}
             </p>
             <div className="flex items-center gap-6">
               <Link href="/privacy" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">
-                Chính sách bảo mật
+                {t("privacy")}
               </Link>
               <Link href="/terms" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">
-                Điều khoản sử dụng
+                {t("terms")}
               </Link>
             </div>
           </div>

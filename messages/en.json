@@ -47,7 +47,9 @@
       "shopNow": "Shop Now",
       "viewCollection": "View Collection",
       "newArrivals": "New Arrivals",
-      "bestSellers": "Best Sellers"
+      "bestSellers": "Best Sellers",
+      "badge": "Top Quality in Vietnam",
+      "rating": "Rating"
     },
     "categories": {
       "title": "Shop by Category",
@@ -57,12 +59,20 @@
       "apparel": "Apparel",
       "bags": "Bags",
       "accessories": "Accessories",
-      "machines": "Machines"
+      "machines": "Stringing Machines",
+      "notFound": "Can't find what you're looking for?",
+      "contactUs": "Contact us for the best advice and support",
+      "viewAllProducts": "View all products"
     },
     "featured": {
       "title": "Featured Products",
-      "subtitle": "Our most popular products",
-      "viewAll": "View All"
+      "subtitle": "Discover the most loved products at Dinhan Store",
+      "viewAll": "View All",
+      "bestSeller": "Best Sellers",
+      "tryAgain": "Please try again later",
+      "noFeatured": "No featured products yet",
+      "comingSoon": "Products will be updated soon",
+      "discountBanner": "Up to 50% off"
     },
     "promo": {
       "freeShipping": "Free Shipping",
@@ -77,7 +87,8 @@
       "discount": "Up to {percent}% off",
       "forNewMembers": "for new members",
       "shopNow": "Shop Now",
-      "learnMore": "Learn More"
+      "learnMore": "Learn More",
+      "promoDesc": "Sign up now to receive exclusive offers and earn points with every order"
     },
     "newsletter": {
       "title": "Subscribe to Newsletter",
@@ -128,7 +139,7 @@
   "cart": {
     "title": "Shopping Cart",
     "empty": "Your cart is empty",
-    "emptyDesc": "You haven't added any products to your cart yet",
+    "emptyDesc": "Add products to your cart to continue shopping",
     "continueShopping": "Continue Shopping",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
@@ -139,12 +150,33 @@
     "update": "Update",
     "discountCode": "Discount Code",
     "applyCode": "Apply",
-    "invalidCode": "Invalid code",
+    "invalidCode": "Invalid discount code",
     "codeApplied": "Discount code applied",
     "freeShipping": "Free Shipping",
     "items": "items",
-    "pointsUsed": "Points Used",
-    "pointsAvailable": "Points Available"
+    "itemCount": "{count} items",
+    "points": "Reward Points",
+    "pointsUsed": "Used {points} points",
+    "pointsAvailable": "Available: {points} points",
+    "noPoints": "You have no reward points",
+    "enterPoints": "Please enter a valid number of points",
+    "maxPoints": "You only have {points} points",
+    "usePoints": "Use Points",
+    "enterDiscountCode": "Enter discount code",
+    "clearCart": "Clear Cart",
+    "loginToOrder": "Login to order",
+    "selectAddress": "Select address",
+    "shippingAddress": "Shipping Address",
+    "addAddress": "Add shipping address",
+    "selectAddressTitle": "Select Address",
+    "addNewAddress": "Add new address",
+    "default": "Default",
+    "setDefault": "Set as default",
+    "orderInfo": "Order Information",
+    "productCount": "Number of products",
+    "totalPayment": "Total Payment",
+    "deliverTo": "Deliver to",
+    "paymentMethods": "Payment Methods"
   },
   "checkout": {
     "title": "Checkout",
@@ -217,6 +249,8 @@
     "about": "About Us",
     "aboutDesc": "Providing authentic badminton products with the best quality and reasonable prices.",
     "quickLinks": "Quick Links",
+    "home": "Home",
+    "products": "Products",
     "categories": "Product Categories",
     "contact": "Contact",
     "address": "Address",

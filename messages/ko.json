@@ -47,7 +47,9 @@
       "shopNow": "지금 쇼핑하기",
       "viewCollection": "컬렉션 보기",
       "newArrivals": "신상품",
-      "bestSellers": "베스트셀러"
+      "bestSellers": "베스트셀러",
+      "badge": "베트남 최고 품질",
+      "rating": "평점"
     },
     "categories": {
       "title": "카테고리별 쇼핑",
@@ -57,12 +59,20 @@
       "apparel": "의류",
       "bags": "가방",
       "accessories": "액세서리",
-      "machines": "머신"
+      "machines": "스트링 머신",
+      "notFound": "찾으시는 제품이 없으신가요?",
+      "contactUs": "최상의 조언과 지원을 위해 문의해 주세요",
+      "viewAllProducts": "모든 제품 보기"
     },
     "featured": {
       "title": "추천 제품",
-      "subtitle": "가장 인기 있는 제품",
-      "viewAll": "전체 보기"
+      "subtitle": "Dinhan Store에서 가장 사랑받는 제품을 만나보세요",
+      "viewAll": "전체 보기",
+      "bestSeller": "베스트셀러",
+      "tryAgain": "나중에 다시 시도해 주세요",
+      "noFeatured": "아직 추천 제품이 없습니다",
+      "comingSoon": "제품이 곧 업데이트됩니다",
+      "discountBanner": "최대 50% 할인"
     },
     "promo": {
       "freeShipping": "무료 배송",
@@ -77,7 +87,8 @@
       "discount": "최대 {percent}% 할인",
       "forNewMembers": "신규 회원 전용",
       "shopNow": "지금 쇼핑하기",
-      "learnMore": "자세히 보기"
+      "learnMore": "자세히 보기",
+      "promoDesc": "지금 가입하고 독점 혜택을 받고 주문할 때마다 포인트를 적립하세요"
     },
     "newsletter": {
       "title": "뉴스레터 구독",
@@ -128,7 +139,7 @@
   "cart": {
     "title": "장바구니",
     "empty": "장바구니가 비어있습니다",
-    "emptyDesc": "아직 장바구니에 제품이 없습니다",
+    "emptyDesc": "장바구니에 제품을 추가하여 쇼핑을 계속하세요",
     "continueShopping": "쇼핑 계속하기",
     "subtotal": "소계",
     "shipping": "배송비",
@@ -139,12 +150,33 @@
     "update": "업데이트",
     "discountCode": "할인 코드",
     "applyCode": "적용",
-    "invalidCode": "유효하지 않은 코드",
+    "invalidCode": "유효하지 않은 할인 코드",
     "codeApplied": "할인 코드가 적용되었습니다",
     "freeShipping": "무료 배송",
     "items": "개",
-    "pointsUsed": "사용 포인트",
-    "pointsAvailable": "사용 가능 포인트"
+    "itemCount": "{count}개",
+    "points": "포인트",
+    "pointsUsed": "{points}포인트 사용",
+    "pointsAvailable": "사용 가능: {points}포인트",
+    "noPoints": "포인트가 없습니다",
+    "enterPoints": "유효한 포인트 수를 입력하세요",
+    "maxPoints": "{points}포인트만 있습니다",
+    "usePoints": "포인트 사용",
+    "enterDiscountCode": "할인 코드 입력",
+    "clearCart": "장바구니 비우기",
+    "loginToOrder": "로그인하여 주문",
+    "selectAddress": "주소 선택",
+    "shippingAddress": "배송 주소",
+    "addAddress": "배송 주소 추가",
+    "selectAddressTitle": "주소 선택",
+    "addNewAddress": "새 주소 추가",
+    "default": "기본",
+    "setDefault": "기본으로 설정",
+    "orderInfo": "주문 정보",
+    "productCount": "상품 수",
+    "totalPayment": "결제 총액",
+    "deliverTo": "배송지",
+    "paymentMethods": "결제 방법"
   },
   "checkout": {
     "title": "결제",
@@ -217,6 +249,8 @@
     "about": "회사 소개",
     "aboutDesc": "최고 품질의 정품 배드민턴 제품을 합리적인 가격에 제공합니다.",
     "quickLinks": "빠른 링크",
+    "home": "홈",
+    "products": "제품",
     "categories": "제품 카테고리",
     "contact": "연락처",
     "address": "주소",

@@ -77,7 +77,7 @@ export function ProductCard({ id, name, slug, price, salePrice, image, brand, st
         {stock <= 5 && stock > 0 && (
           <div className="absolute top-4 right-4 z-10">
             <span className="inline-flex items-center px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded-full">
-              Còn {stock}
+              {t("stock")}: {stock}
             </span>
           </div>
         )}

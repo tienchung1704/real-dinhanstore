@@ -30,8 +30,22 @@ interface RevenueData {
 
 type PeriodType = "today" | "yesterday" | "3days" | "7days" | "custom" | "month";
 
-// Giá trị tối đa của biểu đồ: 1 triệu đồng
-const CHART_MAX_VALUE = 1000000;
+// Hàm tính giá trị max đẹp cho biểu đồ
+function calculateNiceMax(maxValue: number): number {
+  if (maxValue <= 0) return 1000000; // Default 1M nếu không có data
+  
+  // Làm tròn lên đến số đẹp
+  const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
+  const normalized = maxValue / magnitude;
+  
+  let niceMax;
+  if (normalized <= 1) niceMax = 1;
+  else if (normalized <= 2) niceMax = 2;
+  else if (normalized <= 5) niceMax = 5;
+  else niceMax = 10;
+  
+  return niceMax * magnitude;
+}
 
 export default function AnalyticsPage() {
   const { orders, products, stats, ordersLoading } = useAdmin();
@@ -179,7 +193,6 @@ export default function AnalyticsPage() {
           <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
             <BarChart3 className="w-5 h-5 text-emerald-600" />
             Biểu đồ doanh thu
-            <span className="text-xs font-normal text-gray-400">(Tối đa: 1M)</span>
           </h2>
 
           {/* Period Selector */}
@@ -292,94 +305,98 @@ export default function AnalyticsPage() {
               </div>
             </div>
 
-            {/* Bar Chart - Max 1 triệu */}
-            <div className="relative">
-              {/* Y-axis */}
-              <div className="absolute left-0 top-0 bottom-10 w-12 flex flex-col justify-between text-xs text-gray-400">
-                <span>1M</span>
-                <span>750K</span>
-                <span>500K</span>
-                <span>250K</span>
-                <span>0</span>
-              </div>
+            {/* Bar Chart - Dynamic max based on highest revenue */}
+            {(() => {
+              // Tính max value động từ dữ liệu
+              const maxRevenue = Math.max(...revenueData.chartData.map(d => d.revenue), 0);
+              const chartMaxValue = calculateNiceMax(maxRevenue);
+              
+              // Tạo labels cho Y-axis
+              const yAxisLabels = [
+                formatPrice(chartMaxValue),
+                formatPrice(chartMaxValue * 0.75),
+                formatPrice(chartMaxValue * 0.5),
+                formatPrice(chartMaxValue * 0.25),
+                "0"
+              ];
 
-              {/* Chart Grid & Bars */}
-              <div className="ml-14 relative">
-                {/* Grid lines */}
-                <div className="absolute inset-0 bottom-10 flex flex-col justify-between pointer-events-none">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <div key={i} className="border-t border-gray-100 w-full" />
-                  ))}
-                </div>
+              return (
+                <div className="relative">
+                  {/* Y-axis */}
+                  <div className="absolute left-0 top-0 bottom-10 w-14 flex flex-col justify-between text-xs text-gray-400">
+                    {yAxisLabels.map((label, i) => (
+                      <span key={i}>{label}</span>
+                    ))}
+                  </div>
 
-                {/* Bars */}
-                <div className="relative h-64 flex items-end gap-1">
-                  {revenueData.chartData.map((item) => {
-                    // Tính phần trăm dựa trên max 1 triệu
-                    const heightPercent = Math.min((item.revenue / CHART_MAX_VALUE) * 100, 100);
-                    const isOverMax = item.revenue > CHART_MAX_VALUE;
-
-                    return (
-                      <div
-                        key={item.date}
-                        className="flex-1 flex flex-col items-center group"
-                      >
-                        {/* Tooltip */}
-                        <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 absolute -top-2 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 pointer-events-none z-20 whitespace-nowrap shadow-xl transform -translate-y-full">
-                          <p className="font-semibold text-emerald-400">{formatDate(item.date)}</p>
-                          <p className="mt-1">💰 {item.revenue.toLocaleString()}đ</p>
-                          <p>📦 {item.orders} đơn hàng</p>
-                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-                            <div className="border-8 border-transparent border-t-gray-900" />
-                          </div>
-                        </div>
-
-                        {/* Bar */}
-                        <div className="w-full h-full flex items-end justify-center px-0.5">
-                          <div
-                            className={`w-full rounded-t transition-all duration-300 cursor-pointer relative ${
-                              item.revenue > 0
-                                ? isOverMax
-                                  ? "bg-gradient-to-t from-red-600 to-red-400 hover:from-red-700 hover:to-red-500"
-                                  : "bg-gradient-to-t from-emerald-600 to-emerald-400 hover:from-emerald-700 hover:to-emerald-500"
-                                : "bg-gray-200 hover:bg-gray-300"
-                            }`}
-                            style={{
-                              height: item.revenue > 0 ? `${Math.max(heightPercent, 2)}%` : "4px",
-                              minHeight: "4px",
-                            }}
-                          >
-                            {/* Overflow indicator */}
-                            {isOverMax && (
-                              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* X-axis labels */}
-                <div className="flex gap-1 mt-2 h-8">
-                  {revenueData.chartData.map((item) => (
-                    <div key={item.date} className="flex-1 text-center">
-                      <span className="text-xs text-gray-500">{formatDate(item.date)}</span>
+                  {/* Chart Grid & Bars */}
+                  <div className="ml-16 relative">
+                    {/* Grid lines */}
+                    <div className="absolute inset-0 bottom-10 flex flex-col justify-between pointer-events-none">
+                      {[0, 1, 2, 3, 4].map((i) => (
+                        <div key={i} className="border-t border-gray-100 w-full" />
+                      ))}
                     </div>
-                  ))}
+
+                    {/* Bars */}
+                    <div className="relative h-64 flex items-end gap-2">
+                      {revenueData.chartData.map((item) => {
+                        // Tính chiều cao pixel dựa trên max động (256px = h-64)
+                        const maxHeight = 256; // h-64 = 16rem = 256px
+                        const barHeight = chartMaxValue > 0 
+                          ? Math.round((item.revenue / chartMaxValue) * maxHeight)
+                          : 0;
+
+                        return (
+                          <div
+                            key={item.date}
+                            className="flex-1 relative group"
+                            style={{ height: `${maxHeight}px` }}
+                          >
+                            {/* Tooltip */}
+                            <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 absolute -top-16 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 pointer-events-none z-20 whitespace-nowrap shadow-xl">
+                              <p className="font-semibold text-emerald-400">{formatDate(item.date)}</p>
+                              <p className="mt-1">💰 {item.revenue.toLocaleString()}đ</p>
+                              <p>📦 {item.orders} đơn hàng</p>
+                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
+                                <div className="border-8 border-transparent border-t-gray-900" />
+                              </div>
+                            </div>
+
+                            {/* Bar - positioned at bottom */}
+                            <div
+                              className={`absolute bottom-0 left-0 right-0 mx-0.5 rounded-t transition-all duration-500 cursor-pointer ${
+                                item.revenue > 0
+                                  ? "bg-gradient-to-t from-emerald-600 to-emerald-400 hover:from-emerald-700 hover:to-emerald-500"
+                                  : "bg-gray-200 hover:bg-gray-300"
+                              }`}
+                              style={{
+                                height: item.revenue > 0 ? `${Math.max(barHeight, 4)}px` : "4px",
+                              }}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* X-axis labels */}
+                    <div className="flex gap-1 mt-2 h-8">
+                      {revenueData.chartData.map((item) => (
+                        <div key={item.date} className="flex-1 text-center">
+                          <span className="text-xs text-gray-500">{formatDate(item.date)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })()}
 
             {/* Legend */}
             <div className="flex items-center justify-center gap-6 mt-4 text-xs text-gray-500">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-gradient-to-t from-emerald-600 to-emerald-400" />
-                <span>Doanh thu trong ngưỡng</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-gradient-to-t from-red-600 to-red-400" />
-                <span>Vượt ngưỡng 1M</span>
+                <span>Doanh thu theo ngày</span>
               </div>
             </div>
           </>

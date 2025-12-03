@@ -5,19 +5,8 @@ import { routing } from './i18n/routing';
 
 const intlMiddleware = createMiddleware(routing);
 
-const isPublicRoute = createRouteMatcher([
-  '/',
-  '/:locale',
-  '/:locale/products(.*)',
-  '/:locale/about',
-  '/:locale/contact',
-  '/products(.*)',
-  '/about',
-  '/contact',
-]);
-
-const isApiRoute = createRouteMatcher([
-  '/api/(.*)',
+const isAdminRoute = createRouteMatcher([
+  '/admin(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, request: NextRequest) => {
@@ -28,8 +17,19 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
     return NextResponse.next();
   }
   
-  // Skip intl middleware for admin routes
-  if (pathname.startsWith('/admin')) {
+  // Admin routes - require authentication
+  if (isAdminRoute(request)) {
+    const { userId } = await auth();
+    
+    // Not logged in - return 405
+    if (!userId) {
+      return new NextResponse(
+        JSON.stringify({ error: 'Method Not Allowed', message: 'Admin access required' }),
+        { status: 405, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    
+    // Let the admin layout handle role checking
     return NextResponse.next();
   }
   

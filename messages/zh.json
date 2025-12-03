@@ -47,22 +47,32 @@
       "shopNow": "立即购买",
       "viewCollection": "查看系列",
       "newArrivals": "新品上市",
-      "bestSellers": "畅销产品"
+      "bestSellers": "畅销产品",
+      "badge": "越南顶级品质",
+      "rating": "评分"
     },
     "categories": {
       "title": "产品分类",
       "subtitle": "按类别浏览产品",
-      "rackets": "球拍",
-      "shoes": "球鞋",
-      "apparel": "服装",
+      "rackets": "羽毛球拍",
+      "shoes": "羽毛球鞋",
+      "apparel": "运动服装",
       "bags": "背包",
       "accessories": "配件",
-      "machines": "穿线机"
+      "machines": "穿线机",
+      "notFound": "找不到您需要的产品？",
+      "contactUs": "联系我们获取最佳建议和支持",
+      "viewAllProducts": "查看所有产品"
     },
     "featured": {
       "title": "精选产品",
-      "subtitle": "最受欢迎的产品",
-      "viewAll": "查看全部"
+      "subtitle": "探索Dinhan商店最受欢迎的产品",
+      "viewAll": "查看全部",
+      "bestSeller": "畅销产品",
+      "tryAgain": "请稍后再试",
+      "noFeatured": "暂无精选产品",
+      "comingSoon": "产品即将更新",
+      "discountBanner": "最高50%折扣"
     },
     "promo": {
       "freeShipping": "免费配送",
@@ -77,7 +87,8 @@
       "discount": "最高{percent}%折扣",
       "forNewMembers": "新会员专享",
       "shopNow": "立即购买",
-      "learnMore": "了解更多"
+      "learnMore": "了解更多",
+      "promoDesc": "立即注册，享受专属优惠，每笔订单都能积分"
     },
     "newsletter": {
       "title": "订阅通讯",
@@ -128,7 +139,7 @@
   "cart": {
     "title": "购物车",
     "empty": "购物车是空的",
-    "emptyDesc": "您还没有添加任何产品到购物车",
+    "emptyDesc": "添加商品到购物车继续购物",
     "continueShopping": "继续购物",
     "subtotal": "小计",
     "shipping": "运费",
@@ -143,8 +154,29 @@
     "codeApplied": "折扣码已应用",
     "freeShipping": "免运费",
     "items": "件商品",
-    "pointsUsed": "已用积分",
-    "pointsAvailable": "可用积分"
+    "itemCount": "{count}件商品",
+    "points": "积分",
+    "pointsUsed": "已使用{points}积分",
+    "pointsAvailable": "可用：{points}积分",
+    "noPoints": "您还没有积分",
+    "enterPoints": "请输入有效的积分数",
+    "maxPoints": "您只有{points}积分",
+    "usePoints": "使用积分",
+    "enterDiscountCode": "输入折扣码",
+    "clearCart": "清空购物车",
+    "loginToOrder": "登录后下单",
+    "selectAddress": "选择地址",
+    "shippingAddress": "收货地址",
+    "addAddress": "添加收货地址",
+    "selectAddressTitle": "选择地址",
+    "addNewAddress": "添加新地址",
+    "default": "默认",
+    "setDefault": "设为默认",
+    "orderInfo": "订单信息",
+    "productCount": "商品数量",
+    "totalPayment": "支付总额",
+    "deliverTo": "配送至",
+    "paymentMethods": "支付方式"
   },
   "checkout": {
     "title": "结账",
@@ -217,6 +249,8 @@
     "about": "关于我们",
     "aboutDesc": "提供正品羽毛球产品，品质优良，价格合理。",
     "quickLinks": "快速链接",
+    "home": "首页",
+    "products": "产品",
     "categories": "产品分类",
     "contact": "联系方式",
     "address": "地址",

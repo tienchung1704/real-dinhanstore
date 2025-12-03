@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Bot, User, Loader2, Minimize2 } from "lucide-react";
 
 interface Message {
@@ -11,20 +12,30 @@ interface Message {
 }
 
 export function ChatBot() {
+  const t = useTranslations("chat");
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      role: "assistant",
-      content: "Xin chào! 👋 Tôi là trợ lý AI của Dinhan Store. Tôi có thể giúp bạn tìm hiểu về sản phẩm cầu lông, chính sách cửa hàng, hoặc hỗ trợ đặt hàng. Bạn cần hỗ trợ gì ạ?",
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [initialized, setInitialized] = useState(false);
+
+  // Initialize welcome message with translation
+  useEffect(() => {
+    if (!initialized) {
+      setMessages([
+        {
+          id: "welcome",
+          role: "assistant",
+          content: t("welcome"),
+          timestamp: new Date(),
+        },
+      ]);
+      setInitialized(true);
+    }
+  }, [t, initialized]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -85,7 +96,7 @@ export function ChatBot() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau hoặc liên hệ hotline 0901 234 567 để được hỗ trợ.",
+        content: t("error"),
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -102,9 +113,9 @@ export function ChatBot() {
   };
 
   const quickReplies = [
-    "Vợt nào phù hợp cho người mới?",
-    "Chính sách đổi trả",
-    "Giá ship bao nhiêu?",
+    t("quickReplies.newbie"),
+    t("quickReplies.return"),
+    t("quickReplies.shipping"),
   ];
 
   return (
@@ -137,8 +148,8 @@ export function ChatBot() {
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div className="text-white">
-                <h3 className="font-bold">Dinhan Assistant</h3>
-                <p className="text-xs text-white/80">Powered by Gemini AI</p>
+                <h3 className="font-bold">{t("title")}</h3>
+                <p className="text-xs text-white/80">{t("subtitle")}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -242,7 +253,7 @@ export function ChatBot() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyPress}
-                    placeholder="Nhập tin nhắn..."
+                    placeholder={t("placeholder")}
                     className="flex-1 px-4 py-3 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-sm"
                     disabled={isLoading}
                   />

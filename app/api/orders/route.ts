@@ -132,6 +132,16 @@ export async function POST(request: NextRequest) {
       orderItem.price = Number(price);
       orderItem.quantity = item.quantity;
       orderItem.total = itemTotal;
+      // Store product snapshot for order history
+      orderItem.productSnapshot = {
+        id: product.id,
+        name: product.name,
+        slug: product.slug,
+        price: Number(product.price),
+        salePrice: product.salePrice ? Number(product.salePrice) : undefined,
+        brand: product.brand,
+        image: product.images?.[0],
+      };
       orderItems.push(orderItem);
 
       // Update stock

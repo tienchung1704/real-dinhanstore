@@ -11,6 +11,7 @@ interface CategoriesSectionProps {
 const categories = [
   {
     slug: "vot",
+    nameKey: "rackets",
     icon: "🏸",
     color: "from-emerald-500 to-teal-500",
     bgColor: "bg-emerald-50",
@@ -18,6 +19,7 @@ const categories = [
   },
   {
     slug: "giay",
+    nameKey: "shoes",
     icon: "👟",
     color: "from-blue-500 to-indigo-500",
     bgColor: "bg-blue-50",
@@ -25,6 +27,7 @@ const categories = [
   },
   {
     slug: "ao",
+    nameKey: "apparel",
     icon: "👕",
     color: "from-purple-500 to-pink-500",
     bgColor: "bg-purple-50",
@@ -32,6 +35,7 @@ const categories = [
   },
   {
     slug: "balo",
+    nameKey: "bags",
     icon: "🎒",
     color: "from-orange-500 to-red-500",
     bgColor: "bg-orange-50",
@@ -39,6 +43,7 @@ const categories = [
   },
   {
     slug: "phukien",
+    nameKey: "accessories",
     icon: "🔧",
     color: "from-cyan-500 to-blue-500",
     bgColor: "bg-cyan-50",
@@ -46,6 +51,7 @@ const categories = [
   },
   {
     slug: "may",
+    nameKey: "machines",
     icon: "⚙️",
     color: "from-gray-600 to-gray-800",
     bgColor: "bg-gray-100",
@@ -53,17 +59,10 @@ const categories = [
   },
 ];
 
-const categoryNames: Record<string, { vi: string; en: string }> = {
-  vot: { vi: "Vợt cầu lông", en: "Rackets" },
-  giay: { vi: "Giày cầu lông", en: "Shoes" },
-  ao: { vi: "Quần áo", en: "Apparel" },
-  balo: { vi: "Balo & Túi", en: "Bags" },
-  phukien: { vi: "Phụ kiện", en: "Accessories" },
-  may: { vi: "Máy căng vợt", en: "Stringing" },
-};
-
 export function CategoriesSection({ locale }: CategoriesSectionProps) {
   const t = useTranslations("home.categories");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
 
   return (
     <section className="py-20 bg-white">
@@ -72,7 +71,7 @@ export function CategoriesSection({ locale }: CategoriesSectionProps) {
         <div className="text-center mb-14">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Khám phá đầy đủ các danh mục sản phẩm cầu lông chất lượng cao
+            {t("subtitle")}
           </p>
         </div>
 
@@ -98,12 +97,12 @@ export function CategoriesSection({ locale }: CategoriesSectionProps) {
                   
                   {/* Name */}
                   <h3 className="font-bold text-gray-900 group-hover:text-white transition-colors duration-500 text-sm lg:text-base">
-                    {categoryNames[category.slug]?.[locale as "vi" | "en"] || category.slug}
+                    {t(category.nameKey)}
                   </h3>
                   
                   {/* Arrow */}
                   <div className="mt-3 flex items-center gap-1 text-gray-400 group-hover:text-white/80 transition-colors duration-500">
-                    <span className="text-xs font-medium">Xem thêm</span>
+                    <span className="text-xs font-medium">{tCommon("viewMore")}</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>
@@ -123,10 +122,10 @@ export function CategoriesSection({ locale }: CategoriesSectionProps) {
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="text-center lg:text-left">
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2">
-                Không tìm thấy sản phẩm cần tìm?
+                {t("notFound")}
               </h3>
               <p className="text-gray-400">
-                Liên hệ với chúng tôi để được tư vấn và hỗ trợ tốt nhất
+                {t("contactUs")}
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -134,14 +133,14 @@ export function CategoriesSection({ locale }: CategoriesSectionProps) {
                 href={`/${locale}/products`}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl hover:bg-gray-100 transition-colors shadow-xl"
               >
-                Xem tất cả sản phẩm
+                {t("viewAllProducts")}
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-colors"
               >
-                Liên hệ ngay
+                {tNav("contact")}
               </Link>
             </div>
           </div>

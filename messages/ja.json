@@ -47,7 +47,9 @@
       "shopNow": "今すぐ購入",
       "viewCollection": "コレクションを見る",
       "newArrivals": "新着商品",
-      "bestSellers": "ベストセラー"
+      "bestSellers": "ベストセラー",
+      "badge": "ベトナムトップクオリティ",
+      "rating": "評価"
     },
     "categories": {
       "title": "カテゴリー別に探す",
@@ -57,12 +59,20 @@
       "apparel": "ウェア",
       "bags": "バッグ",
       "accessories": "アクセサリー",
-      "machines": "マシン"
+      "machines": "ストリングマシン",
+      "notFound": "お探しの商品が見つかりませんか？",
+      "contactUs": "最適なアドバイスとサポートについてお問い合わせください",
+      "viewAllProducts": "すべての商品を見る"
     },
     "featured": {
       "title": "おすすめ商品",
-      "subtitle": "人気の商品",
-      "viewAll": "すべて見る"
+      "subtitle": "Dinhan Storeで最も人気のある商品をご覧ください",
+      "viewAll": "すべて見る",
+      "bestSeller": "ベストセラー",
+      "tryAgain": "後でもう一度お試しください",
+      "noFeatured": "おすすめ商品はまだありません",
+      "comingSoon": "商品は近日中に更新されます",
+      "discountBanner": "最大50%オフ"
     },
     "promo": {
       "freeShipping": "送料無料",
@@ -77,7 +87,8 @@
       "discount": "最大{percent}%オフ",
       "forNewMembers": "新規会員限定",
       "shopNow": "今すぐ購入",
-      "learnMore": "詳しく見る"
+      "learnMore": "詳しく見る",
+      "promoDesc": "今すぐ登録して、限定特典を受け取り、注文ごとにポイントを獲得しましょう"
     },
     "newsletter": {
       "title": "ニュースレター登録",
@@ -128,7 +139,7 @@
   "cart": {
     "title": "ショッピングカート",
     "empty": "カートは空です",
-    "emptyDesc": "まだ商品がカートに入っていません",
+    "emptyDesc": "商品をカートに追加してお買い物を続けてください",
     "continueShopping": "買い物を続ける",
     "subtotal": "小計",
     "shipping": "送料",
@@ -139,12 +150,33 @@
     "update": "更新",
     "discountCode": "クーポンコード",
     "applyCode": "適用",
-    "invalidCode": "無効なコード",
+    "invalidCode": "無効なクーポンコード",
     "codeApplied": "クーポンが適用されました",
     "freeShipping": "送料無料",
     "items": "点",
-    "pointsUsed": "使用ポイント",
-    "pointsAvailable": "利用可能ポイント"
+    "itemCount": "{count}点",
+    "points": "ポイント",
+    "pointsUsed": "{points}ポイント使用",
+    "pointsAvailable": "利用可能：{points}ポイント",
+    "noPoints": "ポイントがありません",
+    "enterPoints": "有効なポイント数を入力してください",
+    "maxPoints": "{points}ポイントしかありません",
+    "usePoints": "ポイントを使う",
+    "enterDiscountCode": "クーポンコードを入力",
+    "clearCart": "カートを空にする",
+    "loginToOrder": "ログインして注文",
+    "selectAddress": "住所を選択",
+    "shippingAddress": "配送先住所",
+    "addAddress": "配送先住所を追加",
+    "selectAddressTitle": "住所を選択",
+    "addNewAddress": "新しい住所を追加",
+    "default": "デフォルト",
+    "setDefault": "デフォルトに設定",
+    "orderInfo": "注文情報",
+    "productCount": "商品数",
+    "totalPayment": "お支払い合計",
+    "deliverTo": "配送先",
+    "paymentMethods": "お支払い方法"
   },
   "checkout": {
     "title": "お支払い",
@@ -217,6 +249,8 @@
     "about": "会社概要",
     "aboutDesc": "最高品質の正規品バドミントン用品をお手頃価格でご提供。",
     "quickLinks": "クイックリンク",
+    "home": "ホーム",
+    "products": "商品",
     "categories": "カテゴリー",
     "contact": "お問い合わせ",
     "address": "住所",

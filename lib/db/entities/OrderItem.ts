@@ -1,6 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import type { Order } from "./Order";
-import type { Product } from "./Product";
+
+// Interface for product snapshot stored in order
+export interface ProductSnapshot {
+  id: number;
+  name: string;
+  slug: string;
+  price: number;
+  salePrice?: number;
+  brand?: string;
+  image?: string;
+}
 
 @Entity("order_items")
 export class OrderItem {
@@ -10,11 +20,13 @@ export class OrderItem {
   @ManyToOne("Order", "items")
   order!: Order;
 
-  @ManyToOne("Product")
-  product!: Product;
+  // Store product info as JSON snapshot - no foreign key dependency
+  @Column({ type: "json", nullable: true })
+  productSnapshot!: ProductSnapshot | null;
 
-  @Column()
-  productId!: number;
+  // Keep productId for reference only (no FK constraint)
+  @Column({ type: "int", nullable: true })
+  productId!: number | null;
 
   @Column({ length: 200 })
   productName!: string;

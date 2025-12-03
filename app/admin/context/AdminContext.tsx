@@ -104,10 +104,14 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setOrdersLoading(true);
     try {
       const statusParam = status && status !== "all" ? `&status=${status}` : "";
+      console.log("AdminContext: Fetching orders...");
       const res = await fetch(`/api/orders?limit=1000${statusParam}`);
       if (res.ok) {
         const data = await res.json();
+        console.log("AdminContext: Orders fetched:", data.orders?.length || 0);
         setOrders(data.orders || []);
+      } else {
+        console.error("AdminContext: Failed to fetch orders, status:", res.status);
       }
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -140,7 +144,14 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     });
 
     const deliveredOrders = orders.filter((o) => o.status === "delivered");
-    const totalRevenue = deliveredOrders.reduce((sum, o) => sum + Number(o.total), 0);
+    // Calculate revenue from all orders except cancelled
+    const validOrders = orders.filter((o) => o.status !== "cancelled");
+    const totalRevenue = validOrders.reduce((sum, o) => {
+      const orderTotal = Number(o.total) || 0;
+      console.log(`Order ${o.orderNumber}: total=${o.total}, parsed=${orderTotal}`);
+      return sum + orderTotal;
+    }, 0);
+    console.log("AdminContext: Total revenue calculated:", totalRevenue);
 
     setStats({
       totalProducts: products.length,
@@ -221,10 +232,12 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     await Promise.all([fetchOrders(), fetchProducts()]);
   }, [fetchOrders, fetchProducts]);
 
-  // Initial fetch
+  // Initial fetch - only run once on mount
   useEffect(() => {
-    refreshAll();
-  }, [refreshAll]);
+    console.log("AdminContext: Initial fetch starting...");
+    fetchOrders();
+    fetchProducts();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update stats when orders or products change
   useEffect(() => {

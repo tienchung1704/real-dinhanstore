@@ -10,6 +10,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ locale }: HeroSectionProps) {
   const t = useTranslations("home.hero");
+  const tStats = useTranslations("home.stats");
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -39,7 +40,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
               <Sparkles className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm font-medium">Chất lượng hàng đầu Việt Nam</span>
+              <span className="text-sm font-medium">{t("badge")}</span>
             </div>
 
             {/* Title */}
@@ -59,17 +60,17 @@ export function HeroSection({ locale }: HeroSectionProps) {
             <div className="flex flex-wrap gap-8 py-4">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-400">500+</div>
-                <div className="text-sm text-white/60">Sản phẩm</div>
+                <div className="text-sm text-white/60">{tStats("products")}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-pink-400">10K+</div>
-                <div className="text-sm text-white/60">Khách hàng</div>
+                <div className="text-sm text-white/60">{tStats("customers")}</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center gap-1 text-3xl font-bold text-cyan-400">
                   4.9 <Star className="w-6 h-6 fill-current" />
                 </div>
-                <div className="text-sm text-white/60">Đánh giá</div>
+                <div className="text-sm text-white/60">{t("rating")}</div>
               </div>
             </div>
 

@@ -47,22 +47,32 @@
       "shopNow": "Mua Ngay",
       "viewCollection": "Xem Bộ Sưu Tập",
       "newArrivals": "Hàng Mới Về",
-      "bestSellers": "Bán Chạy Nhất"
+      "bestSellers": "Bán Chạy Nhất",
+      "badge": "Chất lượng hàng đầu Việt Nam",
+      "rating": "Đánh giá"
     },
     "categories": {
       "title": "Danh Mục Sản Phẩm",
       "subtitle": "Khám phá các sản phẩm theo danh mục",
-      "rackets": "Vợt",
-      "shoes": "Giày",
+      "rackets": "Vợt cầu lông",
+      "shoes": "Giày cầu lông",
       "apparel": "Quần áo",
-      "bags": "Balo",
+      "bags": "Balo & Túi",
       "accessories": "Phụ kiện",
-      "machines": "Máy căng"
+      "machines": "Máy căng vợt",
+      "notFound": "Không tìm thấy sản phẩm cần tìm?",
+      "contactUs": "Liên hệ với chúng tôi để được tư vấn và hỗ trợ tốt nhất",
+      "viewAllProducts": "Xem tất cả sản phẩm"
     },
     "featured": {
       "title": "Sản Phẩm Nổi Bật",
-      "subtitle": "Những sản phẩm được yêu thích nhất",
-      "viewAll": "Xem Tất Cả"
+      "subtitle": "Khám phá những sản phẩm được yêu thích nhất tại Dinhan Store",
+      "viewAll": "Xem Tất Cả",
+      "bestSeller": "Bán chạy nhất",
+      "tryAgain": "Vui lòng thử lại sau",
+      "noFeatured": "Chưa có sản phẩm nổi bật",
+      "comingSoon": "Sản phẩm sẽ sớm được cập nhật",
+      "discountBanner": "Giảm giá đến 50%"
     },
     "promo": {
       "freeShipping": "Miễn phí vận chuyển",
@@ -77,7 +87,8 @@
       "discount": "Giảm đến {percent}%",
       "forNewMembers": "cho thành viên mới",
       "shopNow": "Mua sắm ngay",
-      "learnMore": "Tìm hiểu thêm"
+      "learnMore": "Tìm hiểu thêm",
+      "promoDesc": "Đăng ký ngay để nhận ưu đãi độc quyền và tích điểm với mỗi đơn hàng"
     },
     "newsletter": {
       "title": "Đăng ký nhận tin",
@@ -128,7 +139,7 @@
   "cart": {
     "title": "Giỏ hàng",
     "empty": "Giỏ hàng trống",
-    "emptyDesc": "Bạn chưa có sản phẩm nào trong giỏ hàng",
+    "emptyDesc": "Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm",
     "continueShopping": "Tiếp tục mua sắm",
     "subtotal": "Tạm tính",
     "shipping": "Phí vận chuyển",
@@ -139,12 +150,33 @@
     "update": "Cập nhật",
     "discountCode": "Mã giảm giá",
     "applyCode": "Áp dụng",
-    "invalidCode": "Mã không hợp lệ",
+    "invalidCode": "Mã giảm giá không hợp lệ",
     "codeApplied": "Đã áp dụng mã giảm giá",
     "freeShipping": "Miễn phí ship",
     "items": "sản phẩm",
-    "pointsUsed": "Điểm đã dùng",
-    "pointsAvailable": "Điểm khả dụng"
+    "itemCount": "{count} sản phẩm",
+    "points": "Điểm thưởng",
+    "pointsUsed": "Đã dùng {points} điểm",
+    "pointsAvailable": "Có: {points} điểm",
+    "noPoints": "Bạn chưa có điểm thưởng",
+    "enterPoints": "Vui lòng nhập số điểm hợp lệ",
+    "maxPoints": "Bạn chỉ có {points} điểm",
+    "usePoints": "Dùng điểm",
+    "enterDiscountCode": "Nhập mã giảm giá",
+    "clearCart": "Xóa giỏ",
+    "loginToOrder": "Đăng nhập để đặt hàng",
+    "selectAddress": "Chọn địa chỉ",
+    "shippingAddress": "Địa chỉ giao hàng",
+    "addAddress": "Thêm địa chỉ giao hàng",
+    "selectAddressTitle": "Chọn địa chỉ",
+    "addNewAddress": "Thêm địa chỉ mới",
+    "default": "Mặc định",
+    "setDefault": "Đặt mặc định",
+    "orderInfo": "Thông tin đơn hàng",
+    "productCount": "Số lượng sản phẩm",
+    "totalPayment": "Tổng thanh toán",
+    "deliverTo": "Giao đến",
+    "paymentMethods": "Phương thức thanh toán"
   },
   "checkout": {
     "title": "Thanh toán",
@@ -217,6 +249,8 @@
     "about": "Về chúng tôi",
     "aboutDesc": "Chuyên cung cấp các sản phẩm cầu lông chính hãng với chất lượng tốt nhất và giá cả hợp lý.",
     "quickLinks": "Liên kết nhanh",
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
     "categories": "Danh mục sản phẩm",
     "contact": "Liên hệ",
     "address": "Địa chỉ",

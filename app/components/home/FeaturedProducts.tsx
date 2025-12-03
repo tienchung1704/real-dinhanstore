@@ -22,6 +22,9 @@ interface FeaturedProductsProps {
 
 export function FeaturedProducts({ locale }: FeaturedProductsProps) {
   const t = useTranslations("home.featured");
+  const tCommon = useTranslations("common");
+  const tProduct = useTranslations("product");
+  const tPromo = useTranslations("home.promo");
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +41,7 @@ export function FeaturedProducts({ locale }: FeaturedProductsProps) {
           setProducts(data);
         }
       } catch (err) {
-        setError("Không thể tải sản phẩm");
+        setError(tCommon("error"));
         console.error("Error fetching products:", err);
       } finally {
         setLoading(false);
@@ -56,11 +59,11 @@ export function FeaturedProducts({ locale }: FeaturedProductsProps) {
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-full mb-4">
               <TrendingUp className="w-4 h-4 text-emerald-600" />
-              <span className="text-sm font-semibold text-emerald-700">Bán chạy nhất</span>
+              <span className="text-sm font-semibold text-emerald-700">{t("bestSeller")}</span>
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-2">{t("title")}</h2>
             <p className="text-gray-500 max-w-lg">
-              Khám phá những sản phẩm được yêu thích nhất tại Dinhan Store
+              {t("subtitle")}
             </p>
           </div>
           <Link
@@ -89,15 +92,15 @@ export function FeaturedProducts({ locale }: FeaturedProductsProps) {
               <span className="text-2xl">😕</span>
             </div>
             <p className="text-gray-600 font-medium">{error}</p>
-            <p className="text-sm text-gray-400 mt-2">Vui lòng thử lại sau</p>
+            <p className="text-sm text-gray-400 mt-2">{t("tryAgain")}</p>
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-3xl shadow-sm">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Sparkles className="w-8 h-8 text-gray-400" />
             </div>
-            <p className="text-gray-600 font-medium">Chưa có sản phẩm nổi bật</p>
-            <p className="text-sm text-gray-400 mt-2">Sản phẩm sẽ sớm được cập nhật</p>
+            <p className="text-gray-600 font-medium">{t("noFeatured")}</p>
+            <p className="text-sm text-gray-400 mt-2">{t("comingSoon")}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -126,15 +129,15 @@ export function FeaturedProducts({ locale }: FeaturedProductsProps) {
           <div className="mt-16 text-center">
             <div className="inline-flex items-center gap-4 p-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl shadow-xl shadow-emerald-500/30">
               <div className="px-6 py-3 text-white">
-                <span className="font-semibold">🎉 Giảm giá đến 50%</span>
+                <span className="font-semibold">🎉 {t("discountBanner")}</span>
                 <span className="mx-2 opacity-60">|</span>
-                <span>Miễn phí vận chuyển đơn từ 500K</span>
+                <span>{tPromo("freeShipping")} {tPromo("freeShippingDesc")}</span>
               </div>
               <Link
                 href="/products"
                 className="px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-gray-50 transition-colors"
               >
-                Mua ngay
+                {tProduct("buyNow")}
               </Link>
             </div>
           </div>

@@ -13,7 +13,10 @@ const statusLabels: Record<string, { label: string; color: string }> = {
 };
 
 export default function AdminDashboard() {
-  const { orders, ordersLoading, stats } = useAdmin();
+  const { orders, ordersLoading, stats, products, productsLoading } = useAdmin();
+
+  // Debug log
+  console.log("Admin Dashboard - Orders:", orders.length, "Products:", products.length, "Stats:", stats);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("vi-VN");
@@ -55,10 +58,11 @@ export default function AdminDashboard() {
   // Get recent orders (last 5)
   const recentOrders = orders.slice(0, 5);
 
-  if (ordersLoading) {
+  if (ordersLoading || productsLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600 mb-4"></div>
+        <p className="text-gray-500">Đang tải dữ liệu...</p>
       </div>
     );
   }

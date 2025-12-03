@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDataSource } from "@/lib/db/data-source";
 import { Product } from "@/lib/db/entities/Product";
+import { CartItem } from "@/lib/db/entities/CartItem";
 
 // GET single product by ID
 export async function GET(
@@ -97,17 +98,29 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
+    const productId = parseInt(id);
     const dataSource = await getDataSource();
     const productRepo = dataSource.getRepository(Product);
+    const cartItemRepo = dataSource.getRepository(CartItem);
 
     const product = await productRepo.findOne({
-      where: { id: parseInt(id) },
+      where: { id: productId },
     });
 
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
+    // Delete related cart items first
+    await cartItemRepo.delete({ productId });
+
+    // Set productId to NULL for order_items (keep order history with productSnapshot)
+    await dataSource.query(
+      "UPDATE order_items SET productId = NULL WHERE productId = ?",
+      [productId]
+    );
+
+    // Now delete the product
     await productRepo.remove(product);
 
     return NextResponse.json({ message: "Product deleted successfully" });

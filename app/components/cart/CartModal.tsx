@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { useCart } from "@/app/hooks/useCartStore";
 import { useUser } from "@clerk/nextjs";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { formatPriceSimple } from "@/lib/formatPrice";
 
 type PaymentMethod = "stripe" | "vietqr" | null;
@@ -28,6 +28,8 @@ type PaymentMethod = "stripe" | "vietqr" | null;
 export function CartModal() {
   const { isSignedIn } = useUser();
   const locale = useLocale();
+  const t = useTranslations("cart");
+  const tCheckout = useTranslations("checkout");
   const {
     items,
     isOpen,
@@ -88,7 +90,7 @@ export function CartModal() {
     setDiscountError("");
     const success = await applyDiscount(discountInput);
     if (!success) {
-      setDiscountError("Mã giảm giá không hợp lệ");
+      setDiscountError(t("invalidCode"));
     } else {
       setDiscountInput("");
     }
@@ -98,11 +100,11 @@ export function CartModal() {
     setPointsError("");
     const points = parseInt(pointsInput) || 0;
     if (points <= 0) {
-      setPointsError("Vui lòng nhập số điểm hợp lệ");
+      setPointsError(t("enterPoints"));
       return;
     }
     if (points > userPoints) {
-      setPointsError(`Bạn chỉ có ${userPoints.toLocaleString()} điểm`);
+      setPointsError(t("maxPoints", { points: userPoints.toLocaleString() }));
       return;
     }
     const success = applyPoints(points);
@@ -136,8 +138,8 @@ export function CartModal() {
               <ShoppingBag className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold">Giỏ hàng</h2>
-              <p className="text-sm text-white/80">{items.length} sản phẩm</p>
+              <h2 className="text-lg font-bold">{t("title")}</h2>
+              <p className="text-sm text-white/80">{items.length} {t("items")}</p>
             </div>
           </div>
           <button onClick={closeCart} className="p-2 hover:bg-white/20 rounded-xl transition-colors">
@@ -152,8 +154,8 @@ export function CartModal() {
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
                 <ShoppingBag className="w-12 h-12 text-gray-300" />
               </div>
-              <p className="text-lg font-medium text-gray-600 mb-2">Giỏ hàng trống</p>
-              <p className="text-sm text-center">Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
+              <p className="text-lg font-medium text-gray-600 mb-2">{t("empty")}</p>
+              <p className="text-sm text-center">{t("emptyDesc")}</p>
             </div>
           ) : (
             <div className="p-4 space-y-3">
@@ -210,7 +212,7 @@ export function CartModal() {
             <div className="bg-white rounded-2xl p-4 shadow-sm">
               <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                 <Tag className="w-4 h-4 text-emerald-500" />
-                Mã giảm giá
+                {t("discountCode")}
               </label>
               {discountCode ? (
                 <div className="flex items-center justify-between bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl px-4 py-3">
@@ -229,14 +231,14 @@ export function CartModal() {
                     type="text"
                     value={discountInput}
                     onChange={(e) => setDiscountInput(e.target.value)}
-                    placeholder="Nhập mã giảm giá"
+                    placeholder={t("enterDiscountCode")}
                     className="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
                   />
                   <button
                     onClick={handleApplyDiscount}
                     className="px-5 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-emerald-500/30 transition-all"
                   >
-                    Áp dụng
+                    {t("applyCode")}
                   </button>
                 </div>
               )}
@@ -248,15 +250,15 @@ export function CartModal() {
               <div className="bg-white rounded-2xl p-4 shadow-sm">
                 <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                   <Gift className="w-4 h-4 text-amber-500" />
-                  Điểm thưởng
+                  {t("points")}
                   <span className="text-xs font-normal text-gray-400 ml-auto">
-                    Có: {userPoints.toLocaleString()} điểm
+                    {t("pointsAvailable", { points: userPoints.toLocaleString() })}
                   </span>
                 </label>
                 {pointsUsed > 0 ? (
                   <div className="flex items-center justify-between bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-amber-700 font-semibold">Đã dùng {pointsUsed.toLocaleString()} điểm</span>
+                      <span className="text-amber-700 font-semibold">{t("pointsUsed", { points: pointsUsed.toLocaleString() })}</span>
                       <span className="text-amber-600 text-sm">(-{pointsUsed.toLocaleString()}đ)</span>
                     </div>
                     <button onClick={removePoints} className="text-amber-600 hover:text-amber-800 p-1">
@@ -269,7 +271,7 @@ export function CartModal() {
                       type="number"
                       value={pointsInput}
                       onChange={(e) => setPointsInput(e.target.value)}
-                      placeholder={`Tối đa ${userPoints.toLocaleString()}`}
+                      placeholder={`Max ${userPoints.toLocaleString()}`}
                       className="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
                       max={userPoints}
                     />
@@ -277,11 +279,11 @@ export function CartModal() {
                       onClick={handleApplyPoints}
                       className="px-5 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-amber-500/30 transition-all"
                     >
-                      Dùng điểm
+                      {t("usePoints")}
                     </button>
                   </div>
                 ) : (
-                  <p className="text-sm text-gray-400">Bạn chưa có điểm thưởng</p>
+                  <p className="text-sm text-gray-400">{t("noPoints")}</p>
                 )}
                 {pointsError && <p className="text-red-500 text-xs mt-2">{pointsError}</p>}
               </div>
@@ -292,7 +294,7 @@ export function CartModal() {
               <div className="bg-white rounded-2xl p-4 shadow-sm">
                 <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-blue-500" />
-                  Địa chỉ giao hàng
+                  {t("shippingAddress")}
                 </label>
                 {selectedAddress ? (
                   <div
@@ -311,7 +313,7 @@ export function CartModal() {
                     className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-gray-500 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 flex items-center justify-center gap-2 transition-all"
                   >
                     <PlusIcon className="w-5 h-5" />
-                    Thêm địa chỉ giao hàng
+                    {t("addAddress")}
                   </button>
                 )}
               </div>
@@ -320,23 +322,23 @@ export function CartModal() {
             {/* Summary */}
             <div className="bg-white rounded-2xl p-4 shadow-sm space-y-3">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Tạm tính</span>
+                <span className="text-gray-500">{t("subtotal")}</span>
                 <span className="font-medium">{formatPriceSimple(subtotal, locale)}</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-sm text-emerald-600">
-                  <span>Giảm giá ({discount}%)</span>
+                  <span>{t("discount")} ({discount}%)</span>
                   <span>-{formatPriceSimple(discountAmount, locale)}</span>
                 </div>
               )}
               {pointsDiscount > 0 && (
                 <div className="flex justify-between text-sm text-amber-600">
-                  <span>Điểm thưởng</span>
+                  <span>{t("points")}</span>
                   <span>-{formatPriceSimple(pointsDiscount, locale)}</span>
                 </div>
               )}
               <div className="flex justify-between text-lg font-bold pt-3 border-t border-gray-100">
-                <span>Tổng cộng</span>
+                <span>{t("total")}</span>
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   {formatPriceSimple(total, locale)}
                 </span>
@@ -349,14 +351,14 @@ export function CartModal() {
                 onClick={clearCart}
                 className="px-5 py-4 border border-gray-200 rounded-2xl text-gray-600 hover:bg-gray-100 font-semibold transition-colors"
               >
-                Xóa giỏ
+                {t("clearCart")}
               </button>
               <button
                 onClick={() => setShowPayment(true)}
                 disabled={!isSignedIn || !selectedAddress}
                 className="flex-1 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-emerald-500/30 disabled:from-gray-300 disabled:to-gray-400 disabled:shadow-none disabled:cursor-not-allowed transition-all"
               >
-                {!isSignedIn ? "Đăng nhập để đặt hàng" : !selectedAddress ? "Chọn địa chỉ" : "Thanh toán"}
+                {!isSignedIn ? t("loginToOrder") : !selectedAddress ? t("selectAddress") : t("checkout")}
               </button>
             </div>
           </div>
