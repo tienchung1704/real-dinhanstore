@@ -13,13 +13,13 @@ import {
   RotateCcw,
   MoreHorizontal,
   Loader2,
-  Search,
   Sparkles,
 } from "lucide-react";
 import { LocaleDropdown } from "@/app/components/features/i18n/locale-dropdown";
 import { UserButton } from "@/app/components/auth/UserButton";
 import { useProductStore } from "@/app/hooks/useProductStore";
 import { useCart } from "@/app/hooks/useCartStore";
+import { SearchBar } from "@/app/components/ui/SearchBar";
 
 const categoryIcons: Record<string, string> = {
   vot: "🏸",
@@ -95,14 +95,7 @@ export function NavigationMenuDemo() {
 
             {/* Search Bar - Desktop */}
             <div className="hidden lg:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" />
-                <input
-                  type="text"
-                  placeholder={tCommon("search") + "..."}
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all"
-                />
-              </div>
+              <SearchBar className="w-full" />
             </div>
 
             {/* Right Actions */}
@@ -327,14 +320,7 @@ export function NavigationMenuDemo() {
         <div className="lg:hidden bg-white border-t border-gray-100 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
           {/* Mobile Search */}
           <div className="p-4 border-b border-gray-100">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder={tCommon("search") + "..."}
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-emerald-500"
-              />
-            </div>
+            <SearchBar />
           </div>
 
           {/* Mobile Links */}

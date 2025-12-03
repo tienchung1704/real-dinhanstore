@@ -47,10 +47,12 @@ export async function POST(request: NextRequest) {
 
           // Update product stock
           for (const item of order.items) {
-            const product = await productRepo.findOne({ where: { id: item.productId } });
-            if (product) {
-              product.stock = Math.max(0, product.stock - item.quantity);
-              await productRepo.save(product);
+            if (item.productId) {
+              const product = await productRepo.findOne({ where: { id: item.productId } });
+              if (product) {
+                product.stock = Math.max(0, product.stock - item.quantity);
+                await productRepo.save(product);
+              }
             }
           }
 

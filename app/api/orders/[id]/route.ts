@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDataSource } from "@/lib/db/data-source";
 import { Order, OrderStatus } from "@/lib/db/entities/Order";
+import { sendOrderStatusUpdateEmail } from "@/lib/email/mailer";
 
 // GET single order
 export async function GET(
@@ -50,6 +51,8 @@ export async function PUT(
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
+    const oldStatus = order.status;
+
     // Only allow updating certain fields
     if (body.status) {
       const validStatuses: OrderStatus[] = [
@@ -73,6 +76,21 @@ export async function PUT(
     }
 
     await orderRepo.save(order);
+
+    // Send email notification if status changed and customer has email
+    if (body.status && oldStatus !== body.status && order.customerEmail) {
+      sendOrderStatusUpdateEmail({
+        orderNumber: order.orderNumber,
+        customerName: order.customerName,
+        customerEmail: order.customerEmail,
+        oldStatus,
+        newStatus: body.status,
+        total: Number(order.total),
+        updatedAt: new Date(),
+      }).catch((err) => {
+        console.error("Failed to send status update email:", err);
+      });
+    }
 
     return NextResponse.json(order);
   } catch (error) {

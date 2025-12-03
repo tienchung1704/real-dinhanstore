@@ -266,4 +266,202 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
   `;
 }
 
+// Order status update email
+export interface OrderStatusEmailData {
+  orderNumber: string;
+  customerName: string;
+  customerEmail: string;
+  oldStatus: string;
+  newStatus: string;
+  total: number;
+  updatedAt: Date;
+}
+
+export async function sendOrderStatusUpdateEmail(data: OrderStatusEmailData): Promise<boolean> {
+  try {
+    const html = generateStatusUpdateEmailHTML(data);
+
+    await transporter.sendMail({
+      from: `"Dinhan Store" <${process.env.MAIL_FROM || process.env.SMTP_USER}>`,
+      to: data.customerEmail,
+      subject: `🏸 Cập nhật đơn hàng #${data.orderNumber} - ${getStatusText(data.newStatus)}`,
+      html,
+    });
+
+    console.log(`Order status update email sent to ${data.customerEmail}`);
+    return true;
+  } catch (error) {
+    console.error("Error sending order status update email:", error);
+    return false;
+  }
+}
+
+function getStatusText(status: string): string {
+  const statuses: Record<string, string> = {
+    pending: "Chờ xử lý",
+    processing: "Đang xử lý",
+    shipped: "Đang giao hàng",
+    delivered: "Đã giao hàng",
+    cancelled: "Đã hủy",
+  };
+  return statuses[status] || status;
+}
+
+function getStatusIcon(status: string): string {
+  const icons: Record<string, string> = {
+    pending: "⏳",
+    processing: "📦",
+    shipped: "🚚",
+    delivered: "✅",
+    cancelled: "❌",
+  };
+  return icons[status] || "📋";
+}
+
+function getStatusColor(status: string): { bg: string; text: string; border: string } {
+  const colors: Record<string, { bg: string; text: string; border: string }> = {
+    pending: { bg: "#fef3c7", text: "#92400e", border: "#f59e0b" },
+    processing: { bg: "#dbeafe", text: "#1e40af", border: "#3b82f6" },
+    shipped: { bg: "#e0e7ff", text: "#3730a3", border: "#6366f1" },
+    delivered: { bg: "#d1fae5", text: "#065f46", border: "#10b981" },
+    cancelled: { bg: "#fee2e2", text: "#991b1b", border: "#ef4444" },
+  };
+  return colors[status] || { bg: "#f3f4f6", text: "#374151", border: "#9ca3af" };
+}
+
+function generateStatusUpdateEmailHTML(data: OrderStatusEmailData): string {
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("vi-VN").format(price) + "đ";
+  };
+
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleString("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const newStatusColor = getStatusColor(data.newStatus);
+  const statusMessage = getStatusMessage(data.newStatus);
+
+  return `
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cập nhật đơn hàng - Dinhan Store</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <!-- Header -->
+    <div style="background: linear-gradient(135deg, #059669 0%, #0d9488 100%); border-radius: 16px 16px 0 0; padding: 32px; text-align: center;">
+      <div style="display: inline-block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 12px; margin-bottom: 16px;">
+        <span style="font-size: 32px;">🏸</span>
+      </div>
+      <h1 style="color: white; margin: 0 0 8px 0; font-size: 24px; font-weight: 700;">Dinhan Store</h1>
+      <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 14px;">Badminton Pro Shop</p>
+    </div>
+
+    <!-- Main Content -->
+    <div style="background: white; padding: 32px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <!-- Status Update Message -->
+      <div style="text-align: center; margin-bottom: 32px;">
+        <div style="display: inline-block; background: ${newStatusColor.bg}; padding: 16px; border-radius: 50%; margin-bottom: 16px;">
+          <span style="font-size: 32px;">${getStatusIcon(data.newStatus)}</span>
+        </div>
+        <h2 style="color: ${newStatusColor.text}; margin: 0 0 8px 0; font-size: 20px;">Cập nhật trạng thái đơn hàng</h2>
+        <p style="color: #6b7280; margin: 0; font-size: 14px;">Xin chào ${data.customerName}!</p>
+      </div>
+
+      <!-- Order Info -->
+      <div style="background: #f9fafb; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+        <table style="width: 100%; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #6b7280;">Mã đơn hàng:</td>
+            <td style="padding: 8px 0; text-align: right; color: #059669; font-weight: 700;">#${data.orderNumber}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #6b7280;">Tổng tiền:</td>
+            <td style="padding: 8px 0; text-align: right; color: #1f2937; font-weight: 600;">${formatPrice(data.total)}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #6b7280;">Cập nhật lúc:</td>
+            <td style="padding: 8px 0; text-align: right; color: #1f2937;">${formatDate(data.updatedAt)}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Status Change -->
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #1f2937; font-size: 16px; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #059669;">
+          📋 Trạng thái đơn hàng
+        </h3>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 16px; padding: 20px;">
+          <div style="text-align: center;">
+            <div style="background: ${getStatusColor(data.oldStatus).bg}; color: ${getStatusColor(data.oldStatus).text}; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+              ${getStatusText(data.oldStatus)}
+            </div>
+          </div>
+          <div style="font-size: 24px;">➡️</div>
+          <div style="text-align: center;">
+            <div style="background: ${newStatusColor.bg}; color: ${newStatusColor.text}; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 2px solid ${newStatusColor.border};">
+              ${getStatusText(data.newStatus)}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Message -->
+      <div style="background: ${newStatusColor.bg}; border-radius: 12px; padding: 20px; margin-bottom: 24px; border-left: 4px solid ${newStatusColor.border};">
+        <p style="margin: 0; color: ${newStatusColor.text}; font-size: 14px; line-height: 1.6;">
+          ${statusMessage}
+        </p>
+      </div>
+
+      <!-- Support Info -->
+      <div style="text-align: center; padding: 24px 0; border-top: 1px solid #e5e7eb;">
+        <p style="color: #6b7280; font-size: 14px; margin: 0 0 16px 0;">
+          Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
+        </p>
+        <div style="display: inline-block; margin: 0 12px;">
+          <span style="color: #059669; font-weight: 600;">📞 Hotline:</span>
+          <span style="color: #1f2937;"> 0901 234 567</span>
+        </div>
+        <div style="display: inline-block; margin: 0 12px;">
+          <span style="color: #059669; font-weight: 600;">✉️ Email:</span>
+          <span style="color: #1f2937;"> info@dinhanstore.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; padding: 24px;">
+      <p style="color: #9ca3af; font-size: 12px; margin: 0 0 8px 0;">
+        © 2024 Dinhan Store. Tất cả quyền được bảo lưu.
+      </p>
+      <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+        123 Đường ABC, Quận 1, TP. Hồ Chí Minh
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+}
+
+function getStatusMessage(status: string): string {
+  const messages: Record<string, string> = {
+    pending: "Đơn hàng của bạn đang chờ xử lý. Chúng tôi sẽ sớm xác nhận và chuẩn bị hàng cho bạn.",
+    processing: "Đơn hàng của bạn đang được xử lý và chuẩn bị. Chúng tôi sẽ giao hàng trong thời gian sớm nhất.",
+    shipped: "🎉 Tin vui! Đơn hàng của bạn đã được giao cho đơn vị vận chuyển. Vui lòng chú ý điện thoại để nhận hàng.",
+    delivered: "✨ Đơn hàng đã được giao thành công! Cảm ơn bạn đã mua hàng tại Dinhan Store. Chúc bạn có trải nghiệm tuyệt vời với sản phẩm!",
+    cancelled: "Đơn hàng của bạn đã bị hủy. Nếu bạn đã thanh toán, chúng tôi sẽ hoàn tiền trong 3-5 ngày làm việc. Xin lỗi vì sự bất tiện này.",
+  };
+  return messages[status] || "Trạng thái đơn hàng của bạn đã được cập nhật.";
+}
+
 export default transporter;
